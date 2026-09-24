@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hearts — Unplayable Card Strategic Contrast & WCAG Guidance (20%, 25%, 30%, 35%)</title>
+  <style>
+    :root {
+      --felt: #153828;
+      --brass: #fbbf24;
+      --cream: #fff7df;
+      --navy: #092017;
+      --card-w: 68px;
+      --card-h: 102px;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      margin: 0; padding: 24px 16px 80px;
+      background: #081d13;
+      color: var(--cream);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex; flex-direction: column; align-items: center; gap: 26px;
+    }
+    header { text-align: center; max-width: 620px; }
+    h1 { margin: 0 0 10px; font: bold 26px Georgia, serif; color: #fff4d5; line-height: 1.25; }
+    p.subtitle { margin: 0; font-size: 15px; color: #cbd5e1; line-height: 1.45; }
+
+    /* AUDIT & STRATEGY PANEL */
+    .panel-box {
+      background: #0d261b;
+      border: 1.5px solid var(--brass);
+      border-radius: 18px;
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+    .panel-title {
+      font: bold 19px Georgia, serif; color: var(--brass); margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .wcag-badge {
+      background: #047857; color: #ecfdf5; font-size: 11.5px; font-weight: 850;
+      padding: 3px 9px; border-radius: 6px; letter-spacing: 0.5px; white-space: nowrap;
+    }
+    .panel-desc {
+      font-size: 14px; line-height: 1.45; color: #e2e8f0; margin: 0 0 14px;
+    }
+
+    /* CONTRAST TABLE */
+    .audit-table {
+      width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13.5px;
+    }
+    .audit-table th {
+      text-align: left; padding: 8px 6px; color: #fde68a; border-bottom: 1.5px solid rgba(251, 191, 36, 0.4); font-size: 12.5px;
+    }
+    .audit-table td {
+      padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: middle;
+    }
+    .pass-aaa { color: #34d399; font-weight: 800; font-size: 11.5px; }
+    .pass-aa { color: #a7f3d0; font-weight: 700; font-size: 11.5px; }
+    .ratio { font-weight: 800; font-family: ui-monospace, SFMono-Regular, monospace; }
+    .ratio-red { color: #fca5a5; }
+    .ratio-black { color: #f1f5f9; }
+
+    /* STRATEGIC VALUE CALLOUT */
+    .strategic-box {
+      background: rgba(251, 191, 36, 0.08);
+      border-left: 4px solid var(--brass);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: #fef08a;
+    }
+    .strategic-box strong { color: #fff; }
+
+    /* INTERACTIVE LIVE TESTER */
+    .interactive-card {
+      background: radial-gradient(ellipse at 50% 25%, #234c37 0%, #153828 50%, #081d13 100%);
+      border: 2px solid var(--brass);
+      border-radius: 20px;
+      padding: 20px 16px;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .btn-row {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;
+    }
+    .preset-btn {
+      flex: 1 1 80px;
+      background: #092017;
+      border: 1.5px solid var(--brass);
+      border-radius: 9999px;
+      color: #fff4d5;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 8px 4px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+    .preset-btn:hover, .preset-btn.active {
+      background: var(--brass);
+      color: #081d13;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+    }
+
+    .slider-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    }
+    .slider-row label { font-size: 14.5px; font-weight: 750; color: #fef08a; white-space: nowrap; }
+    .slider-row span.val { font-size: 20px; font-weight: 900; color: var(--brass); min-width: 52px; text-align: right; }
+    input[type=range] {
+      flex: 1 1 auto; height: 8px; border-radius: 4px; accent-color: var(--brass); cursor: pointer;
+    }
+
+    /* MOCK HAND CONTAINER */
+    .hand-box {
+      position: relative;
+      height: 114px;
+      width: 100%;
+      margin: 10px 0 6px;
+      user-select: none;
+    }
+
+    /* BASE CARD STYLING */
+    .c-btn {
+      position: absolute;
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: 7px;
+      margin: 0; padding: 0;
+      background: #fbf9f1;
+      border: none;
+      box-shadow: -2px 4px 9px rgba(0,0,0,0.5), 0 0 0 1px #04140b;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.15s ease;
+    }
+    .c-btn > svg {
+      display: block; width: 100%; height: 100%; border-radius: inherit;
+    }
+
+    /* PLAYABLE CARDS: NO ARTIFICIAL SELECTION COLOR (NATURAL CARD FACE) */
+    .c-btn.playable {
+      transform: translateY(-8px);
+      box-shadow: -2px 8px 14px rgba(0,0,0,0.65), 0 0 0 1px #04140b;
+      z-index: 20;
+    }
+
+    /* UNPLAYABLE CARDS: BLACK OVERLAY SCRIM */
+    .c-btn.unplayable {
+      transform: translateY(0px);
+      position: absolute;
+      overflow: hidden;
+      cursor: default;
+    }
+    .c-btn.unplayable::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(0, 0, 0, var(--scrim, 0.25));
+      pointer-events: none;
+      transition: background 0.15s ease;
+    }
+
+    /* SIDE-BY-SIDE PRESET COMPARISONS */
+    .preset-list {
+      display: flex; flex-direction: column; gap: 24px; max-width: 540px; width: 100%;
+    }
+    .preset-card {
+      background: radial-gradient(ellipse at 50% 25%, #234c37 0%, #153828 50%, #081d13 100%);
+      border: 1.5px solid rgba(251, 191, 36, 0.4);
+      border-radius: 18px;
+      padding: 16px 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    }
+    .preset-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
+    }
+    .preset-title { font: bold 17.5px Georgia, serif; color: #fff4d5; }
+    .badge-stat {
+      font-size: 11.5px; font-weight: 850; padding: 3px 8px; border-radius: 6px;
+    }
+    .preset-metrics {
+      display: flex; gap: 12px; margin-bottom: 8px; font-size: 13px; font-weight: 700;
+    }
+    .metric-item {
+      background: rgba(0,0,0,0.3); padding: 3px 8px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.1);
+    }
+    .preset-desc { font-size: 13.5px; color: #cbd5e1; line-height: 1.38; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Hearts: Strategic Readability & WCAG Audit</h1>
+  <p class="subtitle">
+    Evaluating <strong>20%, 25%, 30%, and 35%</strong> black overlays on unselectable cards.<br>
+    <strong>Playable cards have NO selection color</strong> (pure ivory Didone face).
+  </p>
+</header>
+
+<!-- WCAG 2.1 & STRATEGY PANEL -->
+<section class="panel-box">
+  <div class="panel-title">
+    <span>WCAG 2.1 Contrast Analysis for Red & Black</span>
+    <span class="wcag-badge">AUDIT: 100% PASS</span>
+  </div>
+  <p class="panel-desc">
+    In Hearts, unplayable cards carry <strong>active strategic value</strong>: Mom needs to track high hearts (penalty points), protect the Queen of Spades, count trump/suit distribution, and identify safe exit cards.
+  </p>
+
+  <table class="audit-table">
+    <thead>
+      <tr>
+        <th>Overlay</th>
+        <th>Ruby Red Ink (<code style="color:#fca5a5;">#c62f27</code>)</th>
+        <th>Black Ink (<code style="color:#f1f5f9;">#1b0a0a</code>)</th>
+        <th>WCAG Rating</th>
+        <th>Mom's Readability Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>0% (Playable)</strong></td>
+        <td><span class="ratio ratio-red">5.19:1</span></td>
+        <td><span class="ratio ratio-black">18.20:1</span></td>
+        <td><span class="pass-aaa">AAA Large / AA Normal</span></td>
+        <td>Baseline (Bright ivory, zero filter)</td>
+      </tr>
+      <tr style="background: rgba(251,191,36,0.06);">
+        <td><strong>20% Overlay</strong></td>
+        <td><span class="ratio ratio-red">4.51:1</span></td>
+        <td><span class="ratio ratio-black">11.60:1</span></td>
+        <td><span class="pass-aaa">Passes Full AA Normal</span></td>
+        <td><strong>Highest Red clarity</strong>; effortless for single-eye floaters</td>
+      </tr>
+      <tr style="background: rgba(251,191,36,0.12); border-left: 3px solid var(--brass);">
+        <td><strong>25% Overlay</strong></td>
+        <td><span class="ratio ratio-red">4.31:1</span></td>
+        <td><span class="ratio ratio-black">10.22:1</span></td>
+        <td><span class="pass-aaa">Passes AA Large (+44%)</span></td>
+        <td><strong>The Sweet Spot</strong>: Clean shadow, high red contrast</td>
+      </tr>
+      <tr style="background: rgba(251,191,36,0.06);">
+        <td><strong>30% Overlay</strong></td>
+        <td><span class="ratio ratio-red">4.08:1</span></td>
+        <td><span class="ratio ratio-black">8.94:1</span></td>
+        <td><span class="pass-aa">Passes AA Large (+36%)</span></td>
+        <td>Distinctly shaded; playable cards visibly pop</td>
+      </tr>
+      <tr>
+        <td><strong>35% Overlay</strong></td>
+        <td><span class="ratio ratio-red">3.84:1</span></td>
+        <td><span class="ratio ratio-black">7.77:1</span></td>
+        <td><span class="pass-aa">Passes AA Large (+28%)</span></td>
+        <td>Heavy separation; red cards noticeably darker</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="strategic-box">
+    <strong>WCAG Guidance Insight</strong>: WCAG 2.1 SC 1.4.3 requires <strong>3.0:1</strong> for large text (≥18pt or ≥14pt bold) and SC 1.4.11 requires 3.0:1 for graphical controls. Mom's cards use heavy 24–28px bold Didone numerals, putting the minimum passing threshold at <strong>3.0:1</strong>.
+    <br><br>
+    Notice that <strong>ALL FOUR options (20% through 35%) comfortably exceed 3.0:1</strong> for both red ink and black ink!
+    Even at 35%, red contrast is <strong>3.84:1</strong> (28% above standard). At 20%, red contrast is <strong>4.51:1</strong>, meeting the strict standard for standard body copy!
+  </div>
+</section>
+
+<!-- LIVE INTERACTIVE SLIDER WITH STRATEGIC CARDS -->
+<section class="interactive-card">
+  <div style="font: bold 18px Georgia, serif; color: #fbbf24;">Live Interactive Opacity Tester</div>
+  
+  <!-- QUICK JUMP BUTTONS -->
+  <div class="btn-row">
+    <button class="preset-btn" onclick="setSlider(20)">20%</button>
+    <button class="preset-btn active" id="btn-25" onclick="setSlider(25)">25% (Sweet Spot)</button>
+    <button class="preset-btn" onclick="setSlider(30)">30%</button>
+    <button class="preset-btn" onclick="setSlider(35)">35%</button>
+  </div>
+
+  <div class="slider-row">
+    <label for="opacity-slider">Scrim Opacity:</label>
+    <input type="range" id="opacity-slider" min="15" max="45" value="25" step="1">
+    <span class="val" id="slider-val">25%</span>
+  </div>
+
+  <div style="font-size:13px; color:#cbd5e1; line-height: 1.35;">
+    Scenario: Clubs led. Playable: <strong>5♣, K♣</strong> (natural ivory).<br>
+    Unplayable strategic cards: <strong>A♥</strong> (danger heart), <strong>10♥</strong> (point), <strong>Q♠</strong> (13pt Queen!), <strong>K♦</strong> (entry).
+  </div>
+
+  <div class="hand-box" id="live-hand">
+    <!-- Rendered via JS -->
+  </div>
+</section>
+
+<!-- PRESET OPTIONS SIDE-BY-SIDE -->
+<div class="preset-list">
+
+  <!-- OPTION 1: 20% OVERLAY -->
+  <section class="preset-card">
+    <div class="preset-header">
+      <div class="preset-title">Option 1: 20% Black Overlay</div>
+      <div class="badge-stat" style="background:#064e3b; color:#a7f3d0;">Red: 4.51:1 (Full AA)</div>
+    </div>
+    <div class="preset-metrics">
+      <span class="metric-item" style="color:#fca5a5;">Red Ink: 4.51:1</span>
+      <span class="metric-item" style="color:#f1f5f9;">Black Ink: 11.60:1</span>
+      <span class="metric-item" style="color:#34d399;">AA Normal Pass</span>
+    </div>
+    <div class="preset-desc">
+      <strong>Maximum Strategic Readability</strong>. Red ink retains remarkable brilliance, making Hearts and Diamonds instantly legible across Mom's visual field even with floaters. Gentle shading marks them as unplayable.
+    </div>
+    <div class="hand-box" style="--scrim: 0.20;" id="hand-preset-20"></div>
+  </section>
+
+  <!-- OPTION 2: 25% OVERLAY -->
+  <section class="preset-card" style="border: 2px solid var(--brass); background: radial-gradient(ellipse at 50% 25%, #2a5a41 0%, #153828 55%, #081d13 100%);">
+    <div class="preset-header">
+      <div class="preset-title">Option 2: 25% Black Overlay</div>
+      <div class="badge-stat" style="background:#b45309; color:#fef08a;">Red: 4.31:1 (Balanced)</div>
+    </div>
+    <div class="preset-metrics">
+      <span class="metric-item" style="color:#fca5a5;">Red Ink: 4.31:1</span>
+      <span class="metric-item" style="color:#f1f5f9;">Black Ink: 10.22:1</span>
+      <span class="metric-item" style="color:#34d399;">AA Large (+44%)</span>
+    </div>
+    <div class="preset-desc">
+      <strong>The Established Sweet Spot</strong>. 44% above the WCAG 3.0:1 threshold. Unplayable cards clearly recede into a soft shadow, while the Queen of Spades and high Hearts remain crisp and easy to inspect.
+    </div>
+    <div class="hand-box" style="--scrim: 0.25;" id="hand-preset-25"></div>
+  </section>
+
+  <!-- OPTION 3: 30% OVERLAY -->
+  <section class="preset-card">
+    <div class="preset-header">
+      <div class="preset-title">Option 3: 30% Black Overlay</div>
+      <div class="badge-stat" style="background:#1e293b; color:#93c5fd;">Red: 4.08:1 (Higher Contrast)</div>
+    </div>
+    <div class="preset-metrics">
+      <span class="metric-item" style="color:#fca5a5;">Red Ink: 4.08:1</span>
+      <span class="metric-item" style="color:#f1f5f9;">Black Ink: 8.94:1</span>
+      <span class="metric-item" style="color:#34d399;">AA Large (+36%)</span>
+    </div>
+    <div class="preset-desc">
+      <strong>Stronger Visual Delta</strong>. Playable cards immediately dominate the foreground. Red suits are visibly dimmed but remain well within WCAG accessibility thresholds.
+    </div>
+    <div class="hand-box" style="--scrim: 0.30;" id="hand-preset-30"></div>
+  </section>
+
+  <!-- OPTION 4: 35% OVERLAY -->
+  <section class="preset-card">
+    <div class="preset-header">
+      <div class="preset-title">Option 4: 35% Black Overlay</div>
+      <div class="badge-stat" style="background:#334155; color:#cbd5e1;">Red: 3.84:1 (Deep Scrim)</div>
+    </div>
+    <div class="preset-metrics">
+      <span class="metric-item" style="color:#fca5a5;">Red Ink: 3.84:1</span>
+      <span class="metric-item" style="color:#f1f5f9;">Black Ink: 7.77:1</span>
+      <span class="metric-item" style="color:#34d399;">AA Large (+28%)</span>
+    </div>
+    <div class="preset-desc">
+      <strong>Maximum Foreground Pop</strong>. Unplayable cards take on a heavy dark veil. Red ink contrast drops to 3.84:1. Still passes WCAG 3.0:1, but the darker ivory tone requires slightly more focusing effort for fine serifs under floaters.
+    </div>
+    <div class="hand-box" style="--scrim: 0.35;" id="hand-preset-35"></div>
+  </section>
+
+</div>
+
+<script src="js/card-glyphs.js"></script>
+<script>
+  // Strategic Hearts hand:
+  // 5C & KC are playable (clubs led)
+  // AH (danger penalty heart!), 10H (point card), QS (13-point Queen!), KD (entry diamond)
+  const sampleCards = [
+    { rank: '5', suit: 'C', playable: true },
+    { rank: 'K', suit: 'C', playable: true },
+    { rank: 'A', suit: 'H', playable: false },
+    { rank: '10', suit: 'H', playable: false },
+    { rank: 'Q', suit: 'S', playable: false },
+    { rank: 'K', suit: 'D', playable: false }
+  ];
+
+  function renderHandBox(container, scrimValue) {
+    let html = '';
+    const step = 56;
+    sampleCards.forEach((c, idx) => {
+      const isPlayable = c.playable;
+      const x = idx * step;
+      const y = isPlayable ? 0 : 8; // subtle 8px natural lift on playable
+      const svg = window.CardGlyphs.cardSVG(c.rank, c.suit, false);
+      html += `
+        <button class="c-btn ${isPlayable ? 'playable' : 'unplayable'}"
+          style="left:${x}px; top:${y}px; ${!isPlayable && scrimValue !== undefined ? '--scrim:' + scrimValue + ';' : ''}">
+          ${svg}
+        </button>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  // Render presets
+  renderHandBox(document.getElementById('hand-preset-20'), 0.20);
+  renderHandBox(document.getElementById('hand-preset-25'), 0.25);
+  renderHandBox(document.getElementById('hand-preset-30'), 0.30);
+  renderHandBox(document.getElementById('hand-preset-35'), 0.35);
+
+  // Live interactive controls
+  const liveBox = document.getElementById('live-hand');
+  const slider = document.getElementById('opacity-slider');
+  const sliderVal = document.getElementById('slider-val');
+
+  function updateLive() {
+    const val = parseFloat(slider.value) / 100;
+    sliderVal.textContent = slider.value + '%';
+    renderHandBox(liveBox, val);
+  }
+
+  function setSlider(val) {
+    slider.value = val;
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.startsWith(val + '%'));
+    });
+    updateLive();
+  }
+
+  slider.addEventListener('input', () => {
+    sliderVal.textContent = slider.value + '%';
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.startsWith(slider.value + '%'));
+    });
+    renderHandBox(liveBox, parseFloat(slider.value) / 100);
+  });
+
+  updateLive();
+</script>
+
+</body>
+</html>

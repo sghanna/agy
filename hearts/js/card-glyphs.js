@@ -6,7 +6,7 @@
   "use strict";
 
   const W = 52, H = 78;
-  const RED = '#c62f27', BLACK = '#1b0a0a';
+  const RED = '#c01525', BLACK = '#1b0a0a';
   let uid = 0;
 
   const VECTORS = {

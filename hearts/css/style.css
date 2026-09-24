@@ -19,7 +19,7 @@
   --table-card-w: 64px;
   --table-card-h: 96px;
   --magenta: #ff00ff;
-  --ink-red: #c62f27;
+  --ink-red: #c01525;
   --ink-black: #1b0a0a;
 }
 
@@ -439,29 +439,27 @@ html, body {
 /* OPTION C: PLAYABLE VS UNPLAYABLE CARDS (ACCESSIBLE HEARTS) */
 /* ========================================================= */
 
-/* Playable cards: Elevated, golden aura, high contrast */
+/* Playable cards: Natural card face, elevated, NO artificial border/selection color */
 .hand-area button.card.playable {
-  transform: translateY(-8px) scale(1.02);
-  border: 2.5px solid #f59e0b;
-  outline: 2px solid rgba(254, 240, 138, 0.6);
-  outline-offset: 1px;
-  box-shadow: 0 10px 18px rgba(0,0,0,0.65), 0 0 14px rgba(245, 158, 11, 0.5);
+  transform: translateY(-8px);
+  border: none;
+  outline: none;
+  box-shadow: -2px 8px 14px rgba(0,0,0,0.65), 0 0 0 1px #04140b;
   z-index: 30;
   cursor: pointer;
 }
 
 .hand-area button.card.playable:hover,
 .hand-area button.card.playable:active {
-  transform: translateY(-12px) scale(1.04);
+  transform: translateY(-11px);
 }
 
-/* Selected to play: Lift higher (-16px) with radiant amber glow & tap-to-play prompt */
+/* Selected to play: Lift higher (-16px) with clear tap-to-play confirmation */
 .hand-area button.card.playable[aria-pressed="true"] {
-  transform: translateY(-16px) scale(1.05);
-  border: 2.5px solid #fbbf24;
-  outline: 3px solid #fef08a;
-  outline-offset: 2px;
-  box-shadow: 0 14px 26px rgba(0,0,0,0.85), 0 0 22px rgba(251, 191, 36, 0.9);
+  transform: translateY(-16px);
+  border: 2px solid var(--brass);
+  outline: 2px solid rgba(254, 240, 138, 0.7);
+  box-shadow: 0 14px 26px rgba(0,0,0,0.85), 0 0 18px rgba(251, 191, 36, 0.75);
   z-index: 50 !important;
 }
 
@@ -489,26 +487,23 @@ html, body {
   display: block;
 }
 
-/* Unplayable cards: Sunk back, dimmed to 28%, subtle watermark */
+/* Unplayable cards: Rest at baseline, 25% black scrim overlay (preserves strategic readability) */
 .hand-area button.card.unplayable {
-  transform: translateY(4px);
-  opacity: 0.28;
-  filter: grayscale(70%) brightness(0.85);
-  transition: transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+  transform: translateY(0);
+  border: none;
+  outline: none;
+  overflow: hidden;
   cursor: pointer;
 }
 
-.hand-area button.card.unplayable::before {
-  content: "✕";
+.hand-area button.card.unplayable::after {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 26px;
-  color: rgba(180, 83, 9, 0.65);
-  font-weight: 900;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(0, 0, 0, 0.25);
   pointer-events: none;
-  z-index: 5;
+  transition: background 0.15s ease;
 }
 
 /* Tactile shake when tapping an unplayable card */
