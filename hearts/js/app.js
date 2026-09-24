@@ -282,10 +282,11 @@
         const isWinner = activeTrickWinnerPlay && 
                          activeTrickWinnerPlay.playerId === play.playerId && 
                          activeTrickWinnerPlay.card.id === play.card.id;
+        const isOpening2C = (engine.trickNumber === 1 && play.card.id === '2C');
         trickHTML += `
-          <div class="trick-spot ${pos} ${isWinner ? 'winner' : ''}">
+          <div class="trick-spot ${pos} ${isWinner ? 'winner' : ''} ${isOpening2C ? 'opening-lead' : ''}">
             ${window.CardGlyphs.cardSVG(play.card.rank, play.card.suit, true)}
-            <div class="trick-tag">${name}</div>
+            <div class="trick-tag">${name}${isOpening2C ? ' · 2♣ Lead' : ''}</div>
           </div>
         `;
       }
@@ -319,15 +320,28 @@
         const suitName = ledSuit ? window.CardGlyphs.getSuitName(ledSuit) : '';
 
         if (engine.trickNumber === 1 && engine.currentTrick.length === 0) {
-          elStatus.textContent = "Your turn · Lead 2 of Clubs (2♣)";
+          elStatus.textContent = "Trick 1 · You hold 2♣ (Must lead 2 of Clubs)";
+          elInstruction.textContent = "Tap the 2 of Clubs to open the game";
+        } else if (engine.trickNumber === 1 && ledSuit) {
+          const leaderName = window.HeartsEngine.PLAYERS[engine.currentTrick[0].playerId].name;
+          if (legal.some(c => c.suit === ledSuit)) {
+            elStatus.textContent = `Trick 1 · ${leaderName} opened 2♣ · Follow clubs (${legal.length} playable)`;
+            elInstruction.textContent = `Must follow suit: ${leaderName} led 2 of Clubs (2♣)`;
+          } else {
+            elStatus.textContent = "Trick 1 · Void in clubs! Discard non-penalty";
+            elInstruction.textContent = "No blood on Trick 1: Hearts and Q♠ cannot be played";
+          }
         } else if (ledSuit) {
           if (legal.some(c => c.suit === ledSuit)) {
             elStatus.textContent = `Your turn · Follow ${suitName} (${legal.length} playable)`;
+            elInstruction.textContent = `Must follow suit: ${suitName} led`;
           } else {
             elStatus.textContent = `Void in ${suitName}! Discard any card`;
+            elInstruction.textContent = "You may discard any suit (including Hearts or Q♠)";
           }
         } else {
           elStatus.textContent = engine.heartsBroken ? "Your lead · Hearts broken" : "Your lead · Hearts not broken";
+          elInstruction.textContent = engine.heartsBroken ? "You may lead any suit including Hearts" : "Hearts not broken: lead Spades, Clubs, or Diamonds";
         }
 
         if (selectedCardToPlay) {
@@ -343,15 +357,20 @@
             elPrimaryBtn.disabled = true;
           }
         } else {
-          elInstruction.textContent = "Tap an elevated card to play";
+          elInstruction.textContent = (engine.trickNumber === 1 && engine.currentTrick.length === 0) ? "Tap the 2 of Clubs (2♣) to lead" : "Tap an elevated card to play";
           elPrimaryBtn.textContent = "Play card";
           elPrimaryBtn.disabled = true;
         }
       } else {
         // AI's turn
         const aiName = window.HeartsEngine.PLAYERS[engine.turnPlayer].name;
-        elStatus.textContent = `${aiName}'s turn...`;
-        elInstruction.textContent = "Waiting for opponents";
+        if (engine.trickNumber === 1 && engine.currentTrick.length === 0) {
+          elStatus.textContent = `Trick 1 · ${aiName} holds 2♣ (Opening game...)`;
+          elInstruction.textContent = `${aiName} starts Trick 1 with the mandatory 2 of Clubs (2♣)`;
+        } else {
+          elStatus.textContent = `${aiName}'s turn...`;
+          elInstruction.textContent = "Waiting for opponents";
+        }
         elPrimaryBtn.textContent = "Opponent thinking";
         elPrimaryBtn.disabled = true;
         scheduleAITurn();

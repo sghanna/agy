@@ -140,20 +140,22 @@
 <!-- HELP DIALOG -->
 <dialog id="help-dialog" aria-labelledby="help-title">
   <div class="dialog-header">
-    <h2 id="help-title">How to Play Hearts</h2>
+    <h2 id="help-title">Official Rules of Hearts</h2>
     <button class="close-btn" onclick="document.getElementById('help-dialog').close()" aria-label="Close help">×</button>
   </div>
   <p><strong>Goal:</strong> Keep your score as low as possible. First player to reach 100 points ends the match; lowest score wins.</p>
-  <p><strong>Penalty Points:</strong> Each Heart is worth 1 point. The Queen of Spades (Q♠) is worth 13 points.</p>
-  <p><strong>Passing:</strong> At the start of each round (except Round 4), select 3 cards to pass (Left, Right, Across, Hold).</p>
-  <p><strong>Rules:</strong></p>
-  <ul style="padding-left:18px; margin:6px 0;">
-    <li>The 2 of Clubs (2♣) always leads the first trick.</li>
-    <li>You must follow suit if you can. If you have none, you may discard any card.</li>
-    <li>No penalty points can be played on Trick 1.</li>
-    <li>Hearts cannot lead until "broken" by an off-suit discard.</li>
+  <p><strong>Penalty Points:</strong> Each Heart is worth 1 point (13 total). The Queen of Spades (Q♠) is worth 13 points. Total = 26 points per hand.</p>
+  <p><strong>Passing Rotation:</strong> Hand 1: Pass Left · Hand 2: Pass Right · Hand 3: Pass Across · Hand 4: Hold (no passing). Cycle repeats.</p>
+  <p><strong>Official Rules:</strong></p>
+  <ul style="padding-left:18px; margin:6px 0; line-height: 1.45;">
+    <li><strong>Opening Lead:</strong> The player holding the <strong>2 of Clubs (2♣)</strong> MUST lead it to open the very first trick of the hand.</li>
+    <li><strong>Strict Follow-Suit:</strong> You must follow the suit led if you hold cards in that suit.</li>
+    <li><strong>No Blood on Trick 1:</strong> If void in clubs on Trick 1, you cannot discard Hearts or the Queen of Spades (unless holding only penalty cards).</li>
+    <li><strong>Hearts Breaking:</strong> Hearts cannot be led until "broken" by an off-suit discard (or if you hold only Hearts).</li>
+    <li><strong>Queen of Spades:</strong> Worth 13 points; does not break hearts; can be led anytime spades are legal.</li>
+    <li><strong>Winning Tricks:</strong> Highest card of the led suit takes the trick. No trumps. The trick winner leads the next trick.</li>
+    <li><strong>Shooting the Moon:</strong> If a player takes all 26 penalty points in a round, that player gets 0 points and all 3 opponents receive +26 points!</li>
   </ul>
-  <p><strong>Shooting the Moon:</strong> If you take ALL 26 penalty points in a round, you get 0 points and all 3 opponents get +26 points!</p>
   <button class="modal-btn primary" onclick="document.getElementById('help-dialog').close()">Got It</button>
 </dialog>
 
