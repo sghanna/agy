@@ -276,6 +276,7 @@
           trickComplete: true,
           resolvedTrick,
           winnerId,
+          winningPlay,
           points: trickPts,
           roundEnd: true
         };
@@ -285,6 +286,7 @@
           trickComplete: true,
           resolvedTrick,
           winnerId,
+          winningPlay,
           points: trickPts,
           roundEnd: false
         };

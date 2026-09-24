@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hearts — Playable Card Affordance Options</title>
+  <style>
+    :root {
+      --felt: #153828;
+      --brass: #fbbf24;
+      --cream: #fff7df;
+      --navy: #092017;
+      --card-w: 68px;
+      --card-h: 96px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 24px 16px;
+      background: #081d13;
+      color: var(--cream);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex; flex-direction: column; align-items: center; gap: 32px;
+    }
+    header { text-align: center; max-width: 500px; }
+    h1 { margin: 0 0 8px; font: bold 26px Georgia, serif; color: #fff4d5; }
+    p.subtitle { margin: 0; font-size: 15px; color: #cbd5e1; line-height: 1.4; }
+
+    .scenario-banner {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1.5px solid var(--brass);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fef08a;
+      text-align: center;
+      max-width: 390px;
+      width: 100%;
+    }
+
+    .options-grid {
+      display: flex; flex-direction: column; gap: 28px; width: 100%; max-width: 390px;
+    }
+
+    .option-card {
+      background: radial-gradient(ellipse at 50% 25%, #234c37 0%, #153828 50%, #081d13 100%);
+      border: 2px solid rgba(251, 191, 36, 0.4);
+      border-radius: 20px;
+      padding: 16px 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    }
+    .option-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.2); padding-bottom: 8px;
+    }
+    .option-title { font: bold 18px Georgia, serif; color: var(--brass); }
+    .option-tag {
+      font-size: 12px; font-weight: 800; background: #0b2518; color: #fde68a;
+      padding: 3px 8px; border-radius: 8px; border: 1px solid var(--brass);
+    }
+    .option-desc { font-size: 13.5px; color: #e2e8f0; margin-bottom: 14px; line-height: 1.35; }
+
+    /* MOCK HAND CONTAINER (7 cards row) */
+    .mock-hand {
+      position: relative;
+      height: 115px;
+      width: 100%;
+      user-select: none;
+    }
+    .c {
+      position: absolute;
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: 7px;
+      background: #fbf9f1;
+      box-shadow: -2px 4px 8px rgba(0,0,0,0.45), 0 0 0 1px #04140b;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 4px 5px;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .c.red { color: #c62f27; }
+    .c.black { color: #1b0a0a; }
+    .c-top { font: bold 22px/1 Georgia, serif; display: flex; flex-direction: column; align-items: flex-start; }
+    .c-suit-mini { font-size: 15px; line-height: 1; margin-top: 1px; }
+    .c-suit-big { font-size: 32px; align-self: flex-end; line-height: 1; }
+
+    /* ========================================================= */
+    /* OPTION A: Golden Elevation & Recessed Dimming (Clean & Bold) */
+    /* ========================================================= */
+    .opt-a .c.playable {
+      transform: translateY(-12px);
+      border: 2.5px solid #fbbf24;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.65), 0 0 10px rgba(251, 191, 36, 0.45);
+      z-index: 10;
+    }
+    .opt-a .c.unplayable {
+      transform: translateY(2px);
+      opacity: 0.32;
+      filter: grayscale(45%) contrast(85%);
+      pointer-events: none;
+    }
+
+    /* ========================================================= */
+    /* OPTION B: Radiant Pulsing Aura & "Play" Check Pill         */
+    /* ========================================================= */
+    .opt-b .c.playable {
+      transform: translateY(-10px);
+      border: 2px solid #34d399;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.6), 0 0 14px 2px rgba(52, 211, 153, 0.6);
+      z-index: 10;
+    }
+    .opt-b .c.playable::after {
+      content: "PLAY";
+      position: absolute;
+      top: -10px;
+      right: 50%;
+      transform: translateX(50%);
+      background: #047857;
+      color: #ecfdf5;
+      border: 1.5px solid #6ee7b7;
+      border-radius: 9999px;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 1px 7px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    .opt-b .c.unplayable {
+      opacity: 0.38;
+      filter: grayscale(60%);
+      pointer-events: none;
+    }
+
+    /* ========================================================= */
+    /* OPTION C: Spotlight Sunburst Frame & Dimmed Lock           */
+    /* ========================================================= */
+    .opt-c .c.playable {
+      transform: translateY(-14px) scale(1.03);
+      border: 2.5px solid #f59e0b;
+      outline: 2px solid rgba(254, 240, 138, 0.6);
+      outline-offset: 1px;
+      box-shadow: 0 12px 22px rgba(0,0,0,0.7), 0 0 16px rgba(245, 158, 11, 0.5);
+      z-index: 12;
+    }
+    .opt-c .c.unplayable {
+      transform: translateY(4px);
+      opacity: 0.28;
+      filter: grayscale(70%) brightness(0.85);
+      pointer-events: none;
+    }
+    .opt-c .c.unplayable::before {
+      content: "✕";
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 26px;
+      color: rgba(180, 83, 9, 0.6);
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+    .hint-bar {
+      margin-top: 8px; font-size: 13.5px; font-weight: 700; color: #fde68a;
+      display: flex; justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Hearts: Playable Card Clarity</h1>
+  <p class="subtitle">Designed independently for Shawn's mom (78, monocular vision with floaters).<br>No guessing: cards that can be played must be impossible to miss.</p>
+</header>
+
+<div class="scenario-banner">
+  Scenario: Michael led the 10 of Clubs (10♣).<br>
+  Mom holds 2 Clubs (playable) and 4 off-suit cards (unplayable).
+</div>
+
+<main class="options-grid">
+
+  <!-- OPTION A -->
+  <section class="option-card opt-a">
+    <div class="option-header">
+      <div class="option-title">Option A: Golden Elevation & Recessed Dimming</div>
+      <div class="option-tag">Recommended</div>
+    </div>
+    <div class="option-desc">
+      Playable cards pop upward by 12px with a warm, high-contrast gold border and soft shadow. Unplayable cards sink back and dim to 32% opacity. Clean, zero visual clutter, highest senior contrast.
+    </div>
+    <div class="mock-hand">
+      <!-- 5♣ (Playable) -->
+      <div class="c black playable" style="left: 10px; z-index: 1;">
+        <div class="c-top">5<span class="c-suit-mini">♣</span></div>
+        <div class="c-suit-big">♣</div>
+      </div>
+      <!-- K♣ (Playable) -->
+      <div class="c black playable" style="left: 64px; z-index: 2;">
+        <div class="c-top">K<span class="c-suit-mini">♣</span></div>
+        <div class="c-suit-big">♣</div>
+      </div>
+      <!-- 9♦ (Unplayable) -->
+      <div class="c red unplayable" style="left: 118px; z-index: 3;">
+        <div class="c-top">9<span class="c-suit-mini">♦</span></div>
+        <div class="c-suit-big">♦</div>
+      </div>
+      <!-- J♦ (Unplayable) -->
+      <div class="c red unplayable" style="left: 172px; z-index: 4;">
+        <div class="c-top">J<span class="c-suit-mini">♦</span></div>
+        <div class="c-suit-big">♦</div>
+      </div>
+      <!-- 8♠ (Unplayable) -->
+      <div class="c black unplayable" style="left: 226px; z-index: 5;">
+        <div class="c-top">8<span class="c-suit-mini">♠</span></div>
+        <div class="c-suit-big">♠</div>
+      </div>
+      <!-- Q♠ (Unplayable) -->
+      <div class="c black unplayable" style="left: 280px; z-index: 6;">
+        <div class="c-top">Q<span class="c-suit-mini">♠</span></div>
+        <div class="c-suit-big">♠</div>
+      </div>
+    </div>
+    <div class="hint-bar">
+      <span>♣ Clubs Led</span>
+      <span style="color: #6ee7b7;">2 Legal Cards (5♣, K♣)</span>
+    </div>
+  </section>
+
+  <!-- OPTION B -->
+  <section class="option-card opt-b">
+    <div class="option-header">
+      <div class="option-title">Option B: Emerald Glow & Floating "PLAY" Pill</div>
+      <div class="option-tag">High Guidance</div>
+    </div>
+    <div class="option-desc">
+      Playable cards lift with an emerald-green glow and a dedicated "PLAY" pill badge floating over each valid card. Unplayable cards dim to 38% grayscale.
+    </div>
+    <div class="mock-hand">
+      <!-- 5♣ (Playable) -->
+      <div class="c black playable" style="left: 10px; z-index: 1;">
+        <div class="c-top">5<span class="c-suit-mini">♣</span></div>
+        <div class="c-suit-big">♣</div>
+      </div>
+      <!-- K♣ (Playable) -->
+      <div class="c black playable" style="left: 64px; z-index: 2;">
+        <div class="c-top">K<span class="c-suit-mini">♣</span></div>
+        <div class="c-suit-big">♣</div>
+      </div>
+      <!-- 9♦ (Unplayable) -->
+      <div class="c red unplayable" style="left: 118px; z-index: 3;">
+        <div class="c-top">9<span class="c-suit-mini">♦</span></div>
+        <div class="c-suit-big">♦</div>
+      </div>
+      <!-- J♦ (Unplayable) -->
+      <div class="c red unplayable" style="left: 172px; z-index: 4;">
+        <div class="c-top">J<span class="c-suit-mini">♦</span></div>
+        <div class="c-suit-big">♦</div>
+      </div>
+      <!-- 8♠ (Unplayable) -->
+      <div class="c black unplayable" style="left: 226px; z-index: 5;">
+        <div class="c-top">8<span class="c-suit-mini">♠</span></div>
+        <div class="c-suit-big">♠</div>
+      </div>
+      <!-- Q♠ (Unplayable) -->
+      <div class="c black unplayable" style="left: 280px; z-index: 6;">
+        <div class="c-top">Q<span class="c-suit-mini">♠</span></div>
+        <div class="c-suit-big">♠</div>
+      </div>
+    </div>
+    <div class="hint-bar">
+      <span>♣ Clubs Led</span>
+      <span style="color: #6ee7b7;">2 Legal Cards (5♣, K♣)</span>
+    </div>
+  </section>
+
+  <!-- OPTION C -->
+  <section class="option-card opt-c">
+    <div class="option-header">
+      <div class="option-title">Option C: Spotlight Scaling & Subtle Lock Watermark</div>
+      <div class="option-tag">Maximum Separation</div>
+    </div>
+    <div class="option-desc">
+      Playable cards scale up slightly (1.03x) with a dual amber/gold halo. Unplayable cards drop down 4px, dim to 28% with a soft "✕" watermark to indicate illegal plays at a glance.
+    </div>
+    <div class="mock-hand">
+      <!-- 5♣ (Playable) -->
+      <div class="c black playable" style="left: 10px; z-index: 1;">
+        <div class="c-top">5<span class="c-suit-mini">♣</span></div>
+        <div class="c-suit-big">♣</div>
+      </div>
+      <!-- K♣ (Playable) -->
+      <div class="c black playable" style="left: 64px; z-index: 2;">
+        <div class="c-top">K<span class="c-suit-mini">♣</span></div>
+        <div class="c-suit-big">♣</div>
+      </div>
+      <!-- 9♦ (Unplayable) -->
+      <div class="c red unplayable" style="left: 118px; z-index: 3;">
+        <div class="c-top">9<span class="c-suit-mini">♦</span></div>
+        <div class="c-suit-big">♦</div>
+      </div>
+      <!-- J♦ (Unplayable) -->
+      <div class="c red unplayable" style="left: 172px; z-index: 4;">
+        <div class="c-top">J<span class="c-suit-mini">♦</span></div>
+        <div class="c-suit-big">♦</div>
+      </div>
+      <!-- 8♠ (Unplayable) -->
+      <div class="c black unplayable" style="left: 226px; z-index: 5;">
+        <div class="c-top">8<span class="c-suit-mini">♠</span></div>
+        <div class="c-suit-big">♠</div>
+      </div>
+      <!-- Q♠ (Unplayable) -->
+      <div class="c black unplayable" style="left: 280px; z-index: 6;">
+        <div class="c-top">Q<span class="c-suit-mini">♠</span></div>
+        <div class="c-suit-big">♠</div>
+      </div>
+    </div>
+    <div class="hint-bar">
+      <span>♣ Clubs Led</span>
+      <span style="color: #6ee7b7;">2 Legal Cards (5♣, K♣)</span>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

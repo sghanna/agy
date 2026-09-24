@@ -11,6 +11,8 @@
   let selectedCardToPlay = null;
   let isAITurnPending = false;
   let soundEnabled = true;
+  let activeResolvedTrick = null;
+  let activeTrickWinnerPlay = null;
 
   // Web Audio Chimes
   let audioCtx = null;
@@ -44,6 +46,18 @@
         gain.connect(ctx.destination);
         osc.start(now);
         osc.stop(now + 0.05);
+      } else if (type === 'nudge') {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(140, now);
+        osc.frequency.exponentialRampToValueAtTime(90, now + 0.09);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.09);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.09);
       } else if (type === 'play') {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
@@ -181,26 +195,46 @@
     const r2TotalW = r2Count > 0 ? (r2Count - 1) * r2Step + cardW : 0;
     const r2Left = Math.round((containerW - r2TotalW) / 2);
 
+    let legalIds = null;
+    if (engine.phase === 'play' && engine.turnPlayer === 0) {
+      const legal = engine.getLegalMoves(0);
+      legalIds = new Set(legal.map(c => c.id));
+    }
+
     let html = '';
     userHand.forEach((card, i) => {
       let x, y, z;
       if (i < splitIdx) {
         x = r1Left + i * r1Step;
-        y = (r2Count === 0) ? 36 : 0;
+        y = (r2Count === 0) ? 44 : 12;
         z = i + 1;
       } else {
         const r2Idx = i - splitIdx;
         x = r2Left + r2Idx * r2Step;
-        y = (r1Count === 0) ? 36 : 72;
+        y = (r1Count === 0) ? 44 : 80;
         z = 20 + r2Idx + 1;
       }
 
       const cardId = card.id;
       let isSelected = false;
+      let cardStateClass = '';
+
       if (engine.phase === 'pass') {
         isSelected = selectedPassCards.some(c => c.id === cardId);
+        if (isSelected) cardStateClass = 'pass-selected';
       } else if (engine.phase === 'play') {
+        if (engine.turnPlayer === 0 && legalIds) {
+          if (legalIds.has(cardId)) {
+            cardStateClass = 'playable';
+            z += 25; // boost playable cards above neighbors
+          } else {
+            cardStateClass = 'unplayable';
+          }
+        }
         isSelected = selectedCardToPlay && selectedCardToPlay.id === cardId;
+        if (isSelected) {
+          z = 60; // selected card is topmost
+        }
       }
 
       const isReceived = card.isReceived;
@@ -208,12 +242,13 @@
       const svg = window.CardGlyphs.cardSVG(card.rank, card.suit, false);
 
       html += `
-        <button class="card ${isReceived ? 'received' : ''}" id="card-${cardId}"
+        <button class="card ${cardStateClass} ${isReceived ? 'received' : ''}" id="card-${cardId}"
           aria-label="${ariaLabel}" aria-pressed="${isSelected}"
           style="left:${x}px; top:${y}px; z-index:${z};"
           onclick="window.HeartsApp.handleCardClick('${cardId}')">
           ${svg}
           <div class="check-circle" aria-hidden="true">✓</div>
+          <div class="play-badge" aria-hidden="true">TAP TO PLAY</div>
         </button>
       `;
     });
@@ -237,12 +272,16 @@
     } else {
       let trickHTML = '<div class="trick-arena">';
       const positions = ['south', 'west', 'north', 'east'];
+      const cardsToRender = activeResolvedTrick || engine.currentTrick;
       
-      for (const play of engine.currentTrick) {
+      for (const play of cardsToRender) {
         const pos = positions[play.playerId];
         const name = window.HeartsEngine.PLAYERS[play.playerId].name;
+        const isWinner = activeTrickWinnerPlay && 
+                         activeTrickWinnerPlay.playerId === play.playerId && 
+                         activeTrickWinnerPlay.card.id === play.card.id;
         trickHTML += `
-          <div class="trick-spot ${pos}">
+          <div class="trick-spot ${pos} ${isWinner ? 'winner' : ''}">
             ${window.CardGlyphs.cardSVG(play.card.rank, play.card.suit, true)}
             <div class="trick-tag">${name}</div>
           </div>
@@ -275,36 +314,34 @@
         // Human's turn
         const legal = engine.getLegalMoves(0);
         const ledSuit = engine.currentTrick.length > 0 ? engine.currentTrick[0].card.suit : null;
+        const suitName = ledSuit ? window.CardGlyphs.getSuitName(ledSuit) : '';
 
         if (engine.trickNumber === 1 && engine.currentTrick.length === 0) {
-          elStatus.textContent = "You have 2♣ · Lead 2 of Clubs";
+          elStatus.textContent = "Your turn · Lead 2 of Clubs (2♣)";
         } else if (ledSuit) {
-          elStatus.textContent = `Your turn · follow ${window.CardGlyphs.getSuitName(ledSuit)}`;
+          if (legal.some(c => c.suit === ledSuit)) {
+            elStatus.textContent = `Your turn · Follow ${suitName} (${legal.length} playable)`;
+          } else {
+            elStatus.textContent = `Void in ${suitName}! Discard any card`;
+          }
         } else {
-          elStatus.textContent = "Your turn to lead";
+          elStatus.textContent = engine.heartsBroken ? "Your lead · Hearts broken" : "Your lead · Hearts not broken";
         }
 
         if (selectedCardToPlay) {
           const isLegal = engine.isMoveLegal(0, selectedCardToPlay.id);
           if (isLegal) {
-            elInstruction.textContent = "Play selected card";
-            elPrimaryBtn.textContent = "Play card";
+            elInstruction.textContent = "Tap card again or button to play";
+            elPrimaryBtn.textContent = `Play ${selectedCardToPlay.rank} of ${window.CardGlyphs.getSuitName(selectedCardToPlay.suit)}`;
             elPrimaryBtn.disabled = false;
           } else {
-            if (ledSuit && legal[0].suit === ledSuit) {
-              elInstruction.textContent = `Must follow suit (${window.CardGlyphs.getSuitName(ledSuit)})`;
-            } else if (engine.trickNumber === 1) {
-              elInstruction.textContent = "No penalty points on trick 1";
-            } else if (!engine.heartsBroken) {
-              elInstruction.textContent = "Hearts not broken yet";
-            } else {
-              elInstruction.textContent = "Illegal play";
-            }
+            selectedCardToPlay = null;
+            elInstruction.textContent = "Tap an elevated card to play";
             elPrimaryBtn.textContent = "Play card";
             elPrimaryBtn.disabled = true;
           }
         } else {
-          elInstruction.textContent = "Choose a card to play";
+          elInstruction.textContent = "Tap an elevated card to play";
           elPrimaryBtn.textContent = "Play card";
           elPrimaryBtn.disabled = true;
         }
@@ -331,8 +368,8 @@
   }
 
   function handleCardClick(cardId) {
-    playSound('tap');
     if (engine.phase === 'pass') {
+      playSound('tap');
       const idx = selectedPassCards.findIndex(c => c.id === cardId);
       if (idx >= 0) {
         selectedPassCards.splice(idx, 1);
@@ -342,12 +379,38 @@
       }
       updateControls();
     } else if (engine.phase === 'play' && engine.turnPlayer === 0) {
+      const isLegal = engine.isMoveLegal(0, cardId);
+      if (!isLegal) {
+        // Option C feedback: shake card and play low nudge audio
+        const el = document.getElementById(`card-${cardId}`);
+        if (el) {
+          el.classList.remove('shake');
+          void el.offsetWidth; // trigger reflow
+          el.classList.add('shake');
+        }
+        playSound('nudge');
+
+        const ledSuit = engine.currentTrick.length > 0 ? engine.currentTrick[0].card.suit : null;
+        if (engine.trickNumber === 1 && engine.currentTrick.length === 0) {
+          elInstruction.textContent = "Trick 1: You must lead the 2 of Clubs (2♣)";
+        } else if (ledSuit) {
+          elInstruction.textContent = `Must follow suit: play a ${window.CardGlyphs.getSuitName(ledSuit)}`;
+        } else if (engine.trickNumber === 1) {
+          elInstruction.textContent = "No penalty points on Trick 1";
+        } else if (!engine.heartsBroken) {
+          elInstruction.textContent = "Hearts haven't been broken yet";
+        }
+        return;
+      }
+
+      playSound('tap');
+      // If already selected, 2nd tap directly plays the card on the spot!
       if (selectedCardToPlay && selectedCardToPlay.id === cardId) {
-        selectedCardToPlay = null;
+        executeHumanPlay();
       } else {
         selectedCardToPlay = engine.hands[0].find(c => c.id === cardId);
+        updateControls();
       }
-      updateControls();
     }
   }
 
@@ -421,7 +484,7 @@
       } else {
         scheduleAITurn();
       }
-    }, 550);
+    }, 750); // Unhurried pace for senior comfort
   }
 
   function handleTrickComplete(result) {
@@ -429,8 +492,17 @@
     const pts = result.points;
     playSound('trick');
     elStatus.textContent = `${winnerName} wins trick (${pts} pts)`;
+    elInstruction.textContent = pts > 0 ? `Took ${pts} penalty points` : "Zero penalty points";
 
+    // Spotlight trick cards and winner
+    activeResolvedTrick = result.resolvedTrick;
+    activeTrickWinnerPlay = result.winningPlay;
+    renderTableCenter();
+
+    // Relaxed 1.8s pause so Mom has time to view who took the trick
     setTimeout(() => {
+      activeResolvedTrick = null;
+      activeTrickWinnerPlay = null;
       if (result.roundEnd) {
         if (engine.isMatchOver) {
           playSound('fanfare');
@@ -440,7 +512,7 @@
         }
       }
       updateControls();
-    }, 1100);
+    }, 1800);
   }
 
   // Modals
