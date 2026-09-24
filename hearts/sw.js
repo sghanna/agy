@@ -1,4 +1,4 @@
-const CACHE_NAME = 'agy-hearts-v6';
+const CACHE_NAME = 'agy-hearts-v8';
 const ASSETS = [
   './',
   './index.html',
@@ -8,6 +8,8 @@ const ASSETS = [
   './js/ai.js',
   './js/app.js',
   './manifest.json',
+  './favicon.svg',
+  './apple-touch-icon.png',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Deep Emerald Table Felt Background -->
+    <radialGradient id="feltBgC5" cx="40%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#1f543b"/>
+      <stop offset="60%" stop-color="#0e2a1d"/>
+      <stop offset="100%" stop-color="#05140d"/>
+    </radialGradient>
+
+    <!-- Imperial Carmine Ruby Gradient -->
+    <radialGradient id="rubyGradC5" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="25%" stop-color="#dc2626"/>
+      <stop offset="60%" stop-color="#c01525"/>
+      <stop offset="85%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#4c0519"/>
+    </radialGradient>
+
+    <!-- Gold Accent Gradient -->
+    <linearGradient id="goldGradC5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="35%" stop-color="#fbbf24"/>
+      <stop offset="70%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="heroHeartShadowC5" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#000000" flood-opacity="0.8"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#fbbf24" flood-opacity="0.35"/>
+    </filter>
+    <filter id="subSuitShadowC5" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+
+    <clipPath id="squircleClipC5">
+      <rect x="0" y="0" width="512" height="512" rx="115"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircleClipC5)">
+    <!-- Deep Emerald Felt Base -->
+    <rect width="512" height="512" fill="url(#feltBgC5)"/>
+
+    <!-- Inset Golden Fillet -->
+    <rect x="18" y="18" width="476" height="476" rx="98" fill="none" stroke="url(#goldGradC5)" stroke-width="2.5" stroke-opacity="0.5"/>
+    <rect x="26" y="26" width="460" height="460" rx="90" fill="none" stroke="url(#goldGradC5)" stroke-width="1" stroke-dasharray="5,4" stroke-opacity="0.3"/>
+
+    <!-- Subtle Ivory / Gold Diamond Card Inset Frame -->
+    <polygon points="256,60 440,256 256,452 72,256" fill="none" stroke="url(#goldGradC5)" stroke-width="1.5" stroke-opacity="0.3"/>
+
+    <!-- HERO SUIT: GIANT IMPERIAL CARMINE HEART (Upper Center) -->
+    <g transform="translate(112, 55) scale(0.57)" filter="url(#heroHeartShadowC5)">
+      <path d="M 256 425 
+               C 130 320 65 240 65 155 
+               C 65 85 118 42 185 42 
+               C 226 42 248 68 256 84 
+               C 264 68 286 42 327 42 
+               C 394 42 447 85 447 155 
+               C 447 240 382 320 256 425 Z" 
+            fill="url(#rubyGradC5)" stroke="url(#goldGradC5)" stroke-width="5"/>
+      <ellipse cx="195" cy="140" rx="38" ry="20" fill="rgba(255, 255, 255, 0.42)" transform="rotate(-30 195 140)"/>
+      <circle cx="170" cy="120" r="9" fill="rgba(255, 255, 255, 0.7)"/>
+    </g>
+
+    <!-- LOWER TRIO: THE THREE COMPANION SUITS -->
+    
+    <!-- 1. SPADE (Bottom Left) -->
+    <g transform="translate(130, 360) scale(0.18)" filter="url(#subSuitShadowC5)">
+      <path d="M269 543 C251 506 239 491 176 428 C143 395 109 360 100 350 C78 326 57 293 48 270 C41 251 41 247 41 214 C41 179 41 177 48 164 C58 145 78 125 97 116 C155 88 215 111 245 172 C257 197 260 193 255 159 C250 118 241 92 222 65 L214 53 L270 53 C326 53 326 53 318 65 C299 92 290 118 285 159 C280 193 283 197 295 172 C325 111 385 88 443 116 C462 125 482 145 492 164 C499 177 499 179 499 214 C499 247 499 251 492 270 C483 293 462 326 440 350 C431 360 397 395 364 428 C301 491 289 506 271 543 Z"
+            fill="#120505" stroke="url(#goldGradC5)" stroke-width="10"/>
+    </g>
+
+    <!-- 2. CLUB (Bottom Center) -->
+    <g transform="translate(256, 395) scale(0.18)" filter="url(#subSuitShadowC5)">
+      <!-- Centered Club -->
+      <g transform="translate(-256, -300)">
+        <path d="M270 551 C233 541 204 510 195 472 C191 456 192 431 196 413 C201 391 213 372 233 352 C248 337 253 330 248 327 C246 326 235 330 222 337 C178 358 139 360 103 343 C37 312 25 214 79 160 C95 144 114 134 138 129 C184 119 238 144 269 189 C284 211 286 208 285 168 C283 108 268 64 240 37 L226 24 L308 24 L390 24 L376 37 C349 63 334 105 332 163 C331 202 334 205 348 185 C379 140 433 115 479 125 C540 138 584 195 577 258 C570 311 530 357 477 368 C458 372 439 370 421 360 C412 355 402 352 399 354 C394 358 399 368 414 384 C471 441 463 534 397 576 C376 590 350 595 318 596 C298 597 286 595 276 592 Z"
+              fill="#120505" stroke="url(#goldGradC5)" stroke-width="10"/>
+      </g>
+    </g>
+
+    <!-- 3. DIAMOND (Bottom Right) -->
+    <g transform="translate(365, 395)" filter="url(#subSuitShadowC5)">
+      <polygon points="0,-42 30,0 0,42 -30,0" fill="#c01525" stroke="url(#goldGradC5)" stroke-width="2.5"/>
+    </g>
+  </g>
+</svg>

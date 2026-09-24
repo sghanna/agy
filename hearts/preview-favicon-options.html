@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hearts — iPhone "Add to Home Screen" Favicon Options (Zero Text)</title>
+  <style>
+    :root {
+      --bg: #0b1510;
+      --card-bg: #12221b;
+      --card-border: #1e3a2e;
+      --gold: #fbbf24;
+      --gold-dark: #b45309;
+      --ruby: #c01525;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --apple-radius: 22.5%;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 32px 20px 80px;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+    .notice-box {
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 14px;
+      color: #fef08a;
+      max-width: 760px;
+      margin: 0 auto 28px;
+    }
+
+    /* CONTROLS BAR */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: #10261e;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px 20px;
+      margin-bottom: 36px;
+      gap: 16px;
+    }
+    .tool-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tool-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .btn-toggle {
+      background: #091712;
+      border: 1px solid #1b3d30;
+      color: #d1d5db;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-toggle:hover {
+      background: #14362a;
+      color: #fff;
+      border-color: var(--gold);
+    }
+    .btn-toggle.active {
+      background: var(--gold);
+      color: #0b1510;
+      border-color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* OPTION CARDS GRID */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+
+    .option-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .option-card:hover {
+      transform: translateY(-4px);
+      border-color: #3b82f6;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+    }
+    .option-card.selected {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px var(--gold), 0 16px 36px rgba(0,0,0,0.6);
+      background: #142a21;
+    }
+    .option-num-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 16px;
+      background: var(--gold);
+      color: #0b1510;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .radio-select-indicator {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;
+      border: 2px solid #4b5563;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .option-card.selected .radio-select-indicator {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .option-card.selected .radio-select-indicator::after {
+      content: "✓";
+      color: #000;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    /* ICON ARTWORK WRAPPER */
+    .icon-preview-wrap {
+      width: 200px;
+      height: 200px;
+      margin: 16px 0 20px;
+      filter: drop-shadow(0 14px 20px rgba(0,0,0,0.65));
+      transition: transform 0.2s ease;
+    }
+    .icon-preview-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: var(--apple-radius);
+    }
+
+    .option-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .option-tagline {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    .option-desc {
+      font-size: 14px;
+      color: #d1d5db;
+      line-height: 1.5;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    /* CONTRAST & ACCESSIBILITY RATINGS */
+    .pill-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+      margin-top: auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 16px;
+    }
+    .pill-item {
+      background: rgba(0,0,0,0.3);
+      padding: 8px 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .pill-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .pill-val {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .pill-val.gold { color: var(--gold); }
+    .pill-val.green { color: #34d399; }
+
+    /* REAL IPHONE HOME SCREEN SIMULATOR */
+    .iphone-sim-section {
+      background: #0d1e17;
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 36px 24px;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .iphone-frame {
+      width: 390px;
+      height: 780px;
+      border-radius: 54px;
+      border: 12px solid #2d3748;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8), inset 0 0 0 2px rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s ease;
+    }
+
+    /* WALLPAPERS */
+    .wp-deep-blue { background: radial-gradient(circle at 50% 20%, #1e1b4b, #09090b); }
+    .wp-emerald { background: radial-gradient(circle at 40% 30%, #064e3b, #022c22, #020b08); }
+    .wp-light { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .wp-midnight { background: #000000; }
+
+    .iphone-notch {
+      width: 120px;
+      height: 30px;
+      background: #000;
+      margin: 0 auto;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .iphone-status-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 24px 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      z-index: 10;
+    }
+    .wp-light .iphone-status-bar { color: #0f172a; }
+
+    .home-screen-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px 14px;
+      padding: 36px 20px;
+      margin-top: 20px;
+    }
+    .home-app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+    .app-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--apple-radius);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .app-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .app-name {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+    }
+    .wp-light .app-name {
+      color: #0f172a;
+      text-shadow: none;
+      font-weight: 600;
+    }
+
+    /* HERO ACTIVE APP HIGHLIGHT */
+    .home-app.hero-hearts .app-icon {
+      box-shadow: 0 0 0 2.5px var(--gold), 0 8px 18px rgba(0,0,0,0.5);
+    }
+    .home-app.hero-hearts .app-name {
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    /* MOCK SYSTEM ICONS */
+    .icon-solitaire {
+      background: radial-gradient(circle at 35% 30%, #b91c1c, #881337, #450a0a);
+      box-shadow: 0 0 0 1.5px #fbbf24;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-solitaire svg {
+      width: 44px;
+      height: 44px;
+    }
+    .icon-messages { background: #22c55e; color: #fff; font-size: 26px; }
+    .icon-photos { background: linear-gradient(135deg, #f59e0b, #ec4899, #3b82f6); font-size: 24px; }
+    .icon-camera { background: #64748b; color: #fff; font-size: 24px; }
+    .icon-mail { background: #0284c7; color: #fff; font-size: 24px; }
+    .icon-safari { background: #2563eb; color: #fff; font-size: 26px; }
+    .icon-weather { background: #38bdf8; color: #fff; font-size: 26px; }
+    .icon-settings { background: #475569; color: #fff; font-size: 24px; }
+
+    /* DOCK */
+    .iphone-dock {
+      margin-top: auto;
+      margin-bottom: 24px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 35px;
+      margin-left: 16px;
+      margin-right: 16px;
+      padding: 14px 14px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .wp-midnight .iphone-dock {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* SAFARI ADD TO HOME SCREEN SHEET */
+    .safari-sheet-container {
+      background: #0d1e17;
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 36px 24px;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .safari-modal {
+      width: 350px;
+      background: #1c1c1e;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .safari-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.15);
+    }
+    .safari-btn-cancel { color: #0a84ff; font-size: 15px; cursor: pointer; }
+    .safari-modal-title { font-size: 16px; font-weight: 600; color: #fff; }
+    .safari-btn-add { color: #0a84ff; font-weight: 700; font-size: 15px; cursor: pointer; }
+
+    .safari-modal-body {
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .safari-app-preview {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--apple-radius);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      flex-shrink: 0;
+    }
+    .safari-app-preview img {
+      width: 100%;
+      height: 100%;
+      border-radius: var(--apple-radius);
+      display: block;
+    }
+    .safari-input-box {
+      flex: 1;
+      background: #2c2c2e;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+    .safari-input-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .safari-input-url {
+      font-size: 12px;
+      color: #8e8e93;
+    }
+
+    /* SELECTION ACTION BAR */
+    .selection-banner {
+      position: sticky;
+      bottom: 24px;
+      background: #142a21;
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      z-index: 100;
+    }
+    .selection-text {
+      font-size: 16px;
+      color: #fff;
+    }
+    .selection-text strong {
+      color: var(--gold);
+      font-size: 18px;
+    }
+    .btn-apply-selection {
+      background: var(--gold);
+      color: #0b1510;
+      font-weight: 800;
+      font-size: 15px;
+      padding: 10px 22px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    .btn-apply-selection:hover {
+      background: #fde68a;
+      transform: scale(1.03);
+    }
+
+    /* ROUND 1 ARCHIVE DRAWER */
+    .archive-box {
+      margin-top: 48px;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      background: #091712;
+      padding: 16px 20px;
+    }
+    .archive-box summary {
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .archive-box summary:hover {
+      color: var(--gold);
+    }
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .archive-item {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .archive-item img {
+      width: 100px;
+      height: 100px;
+      border-radius: var(--apple-radius);
+      margin-bottom: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <div class="badge">Round 2 • Pure Iconography</div>
+      <h1>iPhone "Add to Home Screen" Favicon Options</h1>
+      <p class="subtitle">
+        6 clean, focused, <strong>100% text-free</strong> icon concepts. Zero letters, zero numbers, zero clutter — just bold, unmistakable card game iconography crafted for low-vision clarity at 60×60px on iPhone.
+      </p>
+      <div class="notice-box">
+        ✓ <strong>Zero Text Rule Enforced:</strong> No rank indices ("A", "Q", "2"), no words ("HEARTS"), and no score labels. Pure high-contrast suit forms.
+      </div>
+    </header>
+
+    <!-- TOOLBAR & VIEW CONTROLS -->
+    <div class="toolbar">
+      <div class="tool-group">
+        <span class="tool-label">View:</span>
+        <button class="btn-toggle active" onclick="switchView('gallery')">Master Gallery (200px)</button>
+        <button class="btn-toggle" onclick="switchView('iphone')">iPhone Mockup (60px)</button>
+        <button class="btn-toggle" onclick="switchView('safari')">Safari Install Sheet</button>
+      </div>
+
+      <div class="tool-group">
+        <span class="tool-label">Wallpaper:</span>
+        <button class="btn-toggle active" id="wpBtnEmerald" onclick="setWallpaper('emerald')">Emerald Felt</button>
+        <button class="btn-toggle" id="wpBtnDeepBlue" onclick="setWallpaper('deep-blue')">iOS Blue</button>
+        <button class="btn-toggle" id="wpBtnLight" onclick="setWallpaper('light')">Light Wallpaper</button>
+        <button class="btn-toggle" id="wpBtnMidnight" onclick="setWallpaper('midnight')">Midnight Black</button>
+      </div>
+    </div>
+
+    <!-- VIEW 1: MASTER GALLERY (SIDE BY SIDE 200px) -->
+    <div id="viewGallery" class="view-panel">
+      <div class="options-grid">
+
+        <!-- OPTION 1 -->
+        <div class="option-card selected" id="cardOpt1" onclick="selectOption(1, 'The Pure Ruby Heart', 'icons/clean-1-pure-heart.svg')">
+          <div class="option-num-badge">1</div>
+          <div class="radio-select-indicator"></div>
+          
+          <div class="icon-preview-wrap">
+            <img src="icons/clean-1-pure-heart.svg" alt="Option 1: The Pure Ruby Heart">
+          </div>
+
+          <h2 class="option-title">The Pure Ruby Heart</h2>
+          <div class="option-tagline">The Minimalist Essential</div>
+          <p class="option-desc">
+            A single, bold, sculpted Imperial Carmine (`#c01525`) ruby heart with gold accent outline and jewel facet highlight on deep emerald table felt with a gold fillet squircle. Ultra-clean, zero noise.
+          </p>
+
+          <div class="pill-grid">
+            <div class="pill-item">
+              <span class="pill-lbl">Contrast (WCAG)</span>
+              <span class="pill-val green">14.6:1 (AAA)</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Low-Vision Clarity</span>
+              <span class="pill-val gold">★★★★★+</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Visual Noise</span>
+              <span class="pill-val">Zero (Cleanest)</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Vibe</span>
+              <span class="pill-val">Pure Icon</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPTION 2 -->
+        <div class="option-card" id="cardOpt2" onclick="selectOption(2, 'The Ivory Playing Card Face', 'icons/clean-2-ivory-card.svg')">
+          <div class="option-num-badge">2</div>
+          <div class="radio-select-indicator"></div>
+          
+          <div class="icon-preview-wrap">
+            <img src="icons/clean-2-ivory-card.svg" alt="Option 2: The Ivory Playing Card Face">
+          </div>
+
+          <h2 class="option-title">The Ivory Card Face</h2>
+          <div class="option-tagline">Full-Bleed Tactile Card</div>
+          <p class="option-desc">
+            The entire icon IS a physical vintage ivory card! Textured card stock, gold & crimson fillet borders, corner heart pips, and a large sculpted ruby heart in the center. Looks like a real card on the screen.
+          </p>
+
+          <div class="pill-grid">
+            <div class="pill-item">
+              <span class="pill-lbl">Contrast (WCAG)</span>
+              <span class="pill-val green">11.4:1 (AAA)</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Low-Vision Clarity</span>
+              <span class="pill-val gold">★★★★★+</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Boundary Pop</span>
+              <span class="pill-val">Brightest on Dark</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Vibe</span>
+              <span class="pill-val">Physical Card</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPTION 3 -->
+        <div class="option-card" id="cardOpt3" onclick="selectOption(3, 'The Two Cards: Spade & Heart', 'icons/clean-3-two-cards.svg')">
+          <div class="option-num-badge">3</div>
+          <div class="radio-select-indicator"></div>
+          
+          <div class="icon-preview-wrap">
+            <img src="icons/clean-3-two-cards.svg" alt="Option 3: The Two Cards">
+          </div>
+
+          <h2 class="option-title">The Two Cards</h2>
+          <div class="option-tagline">Spade & Heart on Green Felt</div>
+          <p class="option-desc">
+            Two classic playing cards resting on emerald felt: left card shows a bold black Spade (the Queen), right card shows a sculpted red Heart (the penalties). Clean card silhouettes with suit pips and zero text.
+          </p>
+
+          <div class="pill-grid">
+            <div class="pill-item">
+              <span class="pill-lbl">Contrast (WCAG)</span>
+              <span class="pill-val green">15.2:1 (AAA)</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Low-Vision Clarity</span>
+              <span class="pill-val gold">★★★★★</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Game Meaning</span>
+              <span class="pill-val">Both Danger Cards</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Vibe</span>
+              <span class="pill-val">Classic Table</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPTION 4 -->
+        <div class="option-card" id="cardOpt4" onclick="selectOption(4, 'The Spade in Heart Medallion', 'icons/clean-4-heart-spade.svg')">
+          <div class="option-num-badge">4</div>
+          <div class="radio-select-indicator"></div>
+          
+          <div class="icon-preview-wrap">
+            <img src="icons/clean-4-heart-spade.svg" alt="Option 4: The Spade in Heart Medallion">
+          </div>
+
+          <h2 class="option-title">Spade in Heart Medallion</h2>
+          <div class="option-tagline">The Intertwined Antagonists</div>
+          <p class="option-desc">
+            A circular Cantonese gold medallion framing a radiant ruby Heart with a sleek, gold-bordered black Spade nested directly in its center. Symbolizes the Queen of Spades inside the heart points!
+          </p>
+
+          <div class="pill-grid">
+            <div class="pill-item">
+              <span class="pill-lbl">Contrast (WCAG)</span>
+              <span class="pill-val green">12.8:1 (AAA)</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Low-Vision Clarity</span>
+              <span class="pill-val gold">★★★★★</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Silhouette</span>
+              <span class="pill-val">Distinct Graphic</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Vibe</span>
+              <span class="pill-val">Hong Kong Salon</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPTION 5 -->
+        <div class="option-card" id="cardOpt5" onclick="selectOption(5, 'The Four Suits Diamond', 'icons/clean-5-four-suits.svg')">
+          <div class="option-num-badge">5</div>
+          <div class="radio-select-indicator"></div>
+          
+          <div class="icon-preview-wrap">
+            <img src="icons/clean-5-four-suits.svg" alt="Option 5: The Four Suits Diamond">
+          </div>
+
+          <h2 class="option-title">The Four Suits Diamond</h2>
+          <div class="option-tagline">Card Game Heritage</div>
+          <p class="option-desc">
+            A giant, glowing Imperial Carmine Heart sits prominently in the upper center, balanced by the companion Spade, Club, and Diamond suits below it on emerald felt. Pure card geometry.
+          </p>
+
+          <div class="pill-grid">
+            <div class="pill-item">
+              <span class="pill-lbl">Contrast (WCAG)</span>
+              <span class="pill-val green">13.5:1 (AAA)</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Low-Vision Clarity</span>
+              <span class="pill-val gold">★★★★☆</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Family Vibe</span>
+              <span class="pill-val">Mom Games Suite</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Vibe</span>
+              <span class="pill-val">Harmonious</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPTION 6 -->
+        <div class="option-card" id="cardOpt6" onclick="selectOption(6, 'The Crowned Royal Heart', 'icons/clean-6-crowned-heart.svg')">
+          <div class="option-num-badge">6</div>
+          <div class="radio-select-indicator"></div>
+          
+          <div class="icon-preview-wrap">
+            <img src="icons/clean-6-crowned-heart.svg" alt="Option 6: The Crowned Royal Heart">
+          </div>
+
+          <h2 class="option-title">The Crowned Royal Heart</h2>
+          <div class="option-tagline">The Sovereign Heart</div>
+          <p class="option-desc">
+            A majestic ruby Heart crowned with an elegant 3-point Cantonese royal gold crown with ruby gems, resting on deep emerald felt with subtle gold filigree rings. Regal, simple, and clean.
+          </p>
+
+          <div class="pill-grid">
+            <div class="pill-item">
+              <span class="pill-lbl">Contrast (WCAG)</span>
+              <span class="pill-val green">13.9:1 (AAA)</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Low-Vision Clarity</span>
+              <span class="pill-val gold">★★★★★</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Silhouette</span>
+              <span class="pill-val">Crown Peak Shape</span>
+            </div>
+            <div class="pill-item">
+              <span class="pill-lbl">Vibe</span>
+              <span class="pill-val">Royal & Elegant</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW 2: IPHONE HOME SCREEN SIMULATION (60px PHYSICAL SCALE) -->
+    <div id="viewIphone" class="view-panel" style="display: none;">
+      <div class="iphone-sim-section">
+        <h2 style="font-size: 22px; margin-bottom: 8px;">iPhone Home Screen Simulation (60×60px)</h2>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px; text-align: center;">
+          Testing how the selected clean icon sits on Mom's iPhone Home Screen right next to Solitaire and standard iOS apps.
+        </p>
+
+        <div class="iphone-frame wp-emerald" id="iphoneSimulator">
+          <div class="iphone-notch"></div>
+          <div class="iphone-status-bar">
+            <span>9:41</span>
+            <span>5G 100%</span>
+          </div>
+
+          <div class="home-screen-grid">
+            <!-- Row 1: Mom's Card Games -->
+            <div class="home-app">
+              <div class="app-icon icon-solitaire">
+                <!-- Solitaire Sibling Icon -->
+                <svg viewBox="0 0 100 100" width="40" height="40">
+                  <rect x="20" y="10" width="38" height="56" rx="4" fill="#fafaf6" stroke="#787b74" stroke-width="1.5"/>
+                  <rect x="36" y="24" width="38" height="56" rx="4" fill="#ffffff" stroke="#c01525" stroke-width="1.8"/>
+                  <circle cx="55" cy="52" r="8" fill="#c01525"/>
+                </svg>
+              </div>
+              <span class="app-name">Solitaire</span>
+            </div>
+
+            <!-- THE HEARTS APP (ACTIVE SELECTION) -->
+            <div class="home-app hero-hearts">
+              <div class="app-icon">
+                <img id="simHeartsIcon" src="icons/clean-1-pure-heart.svg" alt="Hearts App Icon">
+              </div>
+              <span class="app-name" id="simHeartsLabel">Hearts</span>
+            </div>
+
+            <div class="home-app">
+              <div class="app-icon icon-photos">🌸</div>
+              <span class="app-name">Photos</span>
+            </div>
+
+            <div class="home-app">
+              <div class="app-icon icon-camera">📷</div>
+              <span class="app-name">Camera</span>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="home-app">
+              <div class="app-icon icon-messages">💬</div>
+              <span class="app-name">Messages</span>
+            </div>
+
+            <div class="home-app">
+              <div class="app-icon icon-mail">✉️</div>
+              <span class="app-name">Mail</span>
+            </div>
+
+            <div class="home-app">
+              <div class="app-icon icon-weather">☀️</div>
+              <span class="app-name">Weather</span>
+            </div>
+
+            <div class="home-app">
+              <div class="app-icon icon-settings">⚙️</div>
+              <span class="app-name">Settings</span>
+            </div>
+          </div>
+
+          <!-- Bottom Dock -->
+          <div class="iphone-dock">
+            <div class="home-app"><div class="app-icon icon-messages" style="width: 52px; height: 52px;">📞</div></div>
+            <div class="home-app"><div class="app-icon icon-safari" style="width: 52px; height: 52px;">🧭</div></div>
+            <div class="home-app"><div class="app-icon icon-mail" style="width: 52px; height: 52px;">✉️</div></div>
+            <div class="home-app"><div class="app-icon icon-photos" style="width: 52px; height: 52px;">🎵</div></div>
+          </div>
+        </div>
+
+        <!-- Quick Icon Switcher Bar for iPhone View -->
+        <div style="margin-top: 24px; display: flex; gap: 10px; align-items: center;">
+          <span style="font-size: 13px; font-weight: 600; color: var(--text-muted);">Switch Icon in Phone:</span>
+          <button class="btn-toggle active" id="btnPhoneOpt1" onclick="selectOption(1, 'The Pure Ruby Heart', 'icons/clean-1-pure-heart.svg')">1</button>
+          <button class="btn-toggle" id="btnPhoneOpt2" onclick="selectOption(2, 'The Ivory Card Face', 'icons/clean-2-ivory-card.svg')">2</button>
+          <button class="btn-toggle" id="btnPhoneOpt3" onclick="selectOption(3, 'The Two Cards', 'icons/clean-3-two-cards.svg')">3</button>
+          <button class="btn-toggle" id="btnPhoneOpt4" onclick="selectOption(4, 'Spade in Heart Medallion', 'icons/clean-4-heart-spade.svg')">4</button>
+          <button class="btn-toggle" id="btnPhoneOpt5" onclick="selectOption(5, 'The Four Suits Diamond', 'icons/clean-5-four-suits.svg')">5</button>
+          <button class="btn-toggle" id="btnPhoneOpt6" onclick="selectOption(6, 'The Crowned Royal Heart', 'icons/clean-6-crowned-heart.svg')">6</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: SAFARI ADD TO HOME SCREEN SHEET -->
+    <div id="viewSafari" class="view-panel" style="display: none;">
+      <div class="safari-sheet-container">
+        <h2 style="font-size: 22px; margin-bottom: 8px;">Safari "Add to Home Screen" Sheet</h2>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px; text-align: center;">
+          This is the exact native action sheet Shawn's mom will see when tapping Safari's Share → "Add to Home Screen".
+        </p>
+
+        <div class="safari-modal">
+          <div class="safari-modal-header">
+            <span class="safari-btn-cancel">Cancel</span>
+            <span class="safari-modal-title">Add to Home Screen</span>
+            <span class="safari-btn-add">Add</span>
+          </div>
+
+          <div class="safari-modal-body">
+            <div class="safari-app-preview">
+              <img id="safariSheetIcon" src="icons/clean-1-pure-heart.svg" alt="App Icon Preview">
+            </div>
+
+            <div class="safari-input-box">
+              <div class="safari-input-name">Hearts</div>
+              <div class="safari-input-url">shawnmac.github.io</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Icon Switcher Bar for Safari View -->
+        <div style="margin-top: 24px; display: flex; gap: 10px; align-items: center;">
+          <span style="font-size: 13px; font-weight: 600; color: var(--text-muted);">Preview in Sheet:</span>
+          <button class="btn-toggle active" id="btnSafariOpt1" onclick="selectOption(1, 'The Pure Ruby Heart', 'icons/clean-1-pure-heart.svg')">1</button>
+          <button class="btn-toggle" id="btnSafariOpt2" onclick="selectOption(2, 'The Ivory Card Face', 'icons/clean-2-ivory-card.svg')">2</button>
+          <button class="btn-toggle" id="btnSafariOpt3" onclick="selectOption(3, 'The Two Cards', 'icons/clean-3-two-cards.svg')">3</button>
+          <button class="btn-toggle" id="btnSafariOpt4" onclick="selectOption(4, 'Spade in Heart Medallion', 'icons/clean-4-heart-spade.svg')">4</button>
+          <button class="btn-toggle" id="btnSafariOpt5" onclick="selectOption(5, 'The Four Suits Diamond', 'icons/clean-5-four-suits.svg')">5</button>
+          <button class="btn-toggle" id="btnSafariOpt6" onclick="selectOption(6, 'The Crowned Royal Heart', 'icons/clean-6-crowned-heart.svg')">6</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELECTION STICKY BAR -->
+    <div class="selection-banner">
+      <div class="selection-text">
+        Current Choice: <strong id="selectedName">Option 1: The Pure Ruby Heart</strong>
+      </div>
+      <div>
+        <button class="btn-apply-selection" onclick="confirmChoice()">Choose This Option</button>
+      </div>
+    </div>
+
+    <!-- ARCHIVE OF ROUND 1 CONCEPTS -->
+    <details class="archive-box">
+      <summary>View Prior Round 1 Explorations (With Text/Ranks)</summary>
+      <div class="archive-grid">
+        <div class="archive-item">
+          <img src="icons/option-1-nemeses.svg" alt="R1 Opt 1">
+          <div>R1: Dueling Nemeses</div>
+        </div>
+        <div class="archive-item">
+          <img src="icons/option-2-imperial-crest.svg" alt="R1 Opt 2">
+          <div>R1: Imperial Crest</div>
+        </div>
+        <div class="archive-item">
+          <img src="icons/option-3-opening-2c.svg" alt="R1 Opt 3">
+          <div>R1: 2♣ Opening Lead</div>
+        </div>
+        <div class="archive-item">
+          <img src="icons/option-4-trick-drop.svg" alt="R1 Opt 4">
+          <div>R1: Trick Drop</div>
+        </div>
+        <div class="archive-item">
+          <img src="icons/option-5-didone-ace.svg" alt="R1 Opt 5">
+          <div>R1: Bodoni Ace</div>
+        </div>
+        <div class="archive-item">
+          <img src="icons/option-6-moon-shot.svg" alt="R1 Opt 6">
+          <div>R1: Moon Shot</div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <script>
+    let currentSelectedOpt = 1;
+    let currentSelectedName = "The Pure Ruby Heart";
+    let currentSelectedSrc = "icons/clean-1-pure-heart.svg";
+
+    function selectOption(num, name, src) {
+      currentSelectedOpt = num;
+      currentSelectedName = name;
+      currentSelectedSrc = src;
+
+      // Update card selections
+      for (let i = 1; i <= 6; i++) {
+        const card = document.getElementById('cardOpt' + i);
+        if (card) {
+          if (i === num) {
+            card.classList.add('selected');
+          } else {
+            card.classList.remove('selected');
+          }
+        }
+        // Update phone buttons
+        const pBtn = document.getElementById('btnPhoneOpt' + i);
+        if (pBtn) pBtn.classList.toggle('active', i === num);
+        // Update safari buttons
+        const sBtn = document.getElementById('btnSafariOpt' + i);
+        if (sBtn) sBtn.classList.toggle('active', i === num);
+      }
+
+      // Update Simulator Icons
+      document.getElementById('simHeartsIcon').src = src;
+      document.getElementById('safariSheetIcon').src = src;
+      document.getElementById('selectedName').textContent = 'Option ' + num + ': ' + name;
+    }
+
+    function switchView(mode) {
+      document.getElementById('viewGallery').style.display = mode === 'gallery' ? 'block' : 'none';
+      document.getElementById('viewIphone').style.display = mode === 'iphone' ? 'block' : 'none';
+      document.getElementById('viewSafari').style.display = mode === 'safari' ? 'block' : 'none';
+
+      // Update active state on view buttons
+      const buttons = document.querySelectorAll('.toolbar .tool-group:first-child .btn-toggle');
+      buttons[0].classList.toggle('active', mode === 'gallery');
+      buttons[1].classList.toggle('active', mode === 'iphone');
+      buttons[2].classList.toggle('active', mode === 'safari');
+    }
+
+    function setWallpaper(wp) {
+      const sim = document.getElementById('iphoneSimulator');
+      sim.className = 'iphone-frame wp-' + wp;
+
+      document.getElementById('wpBtnEmerald').classList.toggle('active', wp === 'emerald');
+      document.getElementById('wpBtnDeepBlue').classList.toggle('active', wp === 'deep-blue');
+      document.getElementById('wpBtnLight').classList.toggle('active', wp === 'light');
+      document.getElementById('wpBtnMidnight').classList.toggle('active', wp === 'midnight');
+    }
+
+    function confirmChoice() {
+      alert("Selected Option " + currentSelectedOpt + " (" + currentSelectedName + ")!\n\nTell Shawn in chat: 'Let's go with Option " + currentSelectedOpt + "' and Antigravity will generate production PNGs and wire them up.");
+    }
+  </script>
+</body>
+</html>

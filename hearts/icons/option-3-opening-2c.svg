@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="feltBg3" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#1f5139"/>
+      <stop offset="60%" stop-color="#0f2e20"/>
+      <stop offset="100%" stop-color="#06160e"/>
+    </radialGradient>
+
+    <linearGradient id="cardStock3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#fdfdf9"/>
+      <stop offset="100%" stop-color="#ebebe3"/>
+    </linearGradient>
+
+    <filter id="shadowLead3" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="8" dy="16" stdDeviation="16" flood-color="#000000" flood-opacity="0.8"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#fbbf24" flood-opacity="0.4"/>
+    </filter>
+    <filter id="shadowBack3" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="-6" dy="10" stdDeviation="10" flood-color="#000000" flood-opacity="0.65"/>
+    </filter>
+
+    <clipPath id="squircleClip3">
+      <rect x="0" y="0" width="512" height="512" rx="115"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircleClip3)">
+    <!-- Deep Emerald Felt Background -->
+    <rect width="512" height="512" fill="url(#feltBg3)"/>
+    <rect x="14" y="14" width="484" height="484" rx="102" fill="none" stroke="#fbbf24" stroke-width="2" stroke-opacity="0.3"/>
+
+    <!-- CARD 1 (BACKGROUND): QUEEN OF SPADES (peeking left at -14deg) -->
+    <g transform="translate(160, 240) rotate(-14) translate(-160, -240)" filter="url(#shadowBack3)" opacity="0.88">
+      <rect x="70" y="70" width="220" height="330" rx="18" fill="url(#cardStock3)" stroke="#787b74" stroke-width="2"/>
+      <!-- Rank Q -->
+      <text x="90" y="148" font-family="Georgia, serif" font-size="76" font-weight="900" fill="#1b0a0a">Q</text>
+      <!-- Spade Pip -->
+      <path d="M269 543 C251 506 239 491 176 428 C143 395 109 360 100 350 C78 326 57 293 48 270 C41 251 41 247 41 214 C41 179 41 177 48 164 C58 145 78 125 97 116 C155 88 215 111 245 172 C257 197 260 193 255 159 C250 118 241 92 222 65 L214 53 L270 53 C326 53 326 53 318 65 C299 92 290 118 285 159 C280 193 283 197 295 172 C325 111 385 88 443 116 C462 125 482 145 492 164 C499 177 499 179 499 214 C499 247 499 251 492 270 C483 293 462 326 440 350 C431 360 397 395 364 428 C301 491 289 506 271 543 Z"
+            fill="#1b0a0a" transform="translate(100, 190) scale(0.2)"/>
+    </g>
+
+    <!-- CARD 2 (BACKGROUND RIGHT): ACE OF HEARTS (peeking right at +12deg) -->
+    <g transform="translate(350, 240) rotate(12) translate(-350, -240)" filter="url(#shadowBack3)" opacity="0.88">
+      <rect x="240" y="70" width="220" height="330" rx="18" fill="url(#cardStock3)" stroke="#787b74" stroke-width="2"/>
+      <text x="390" y="148" font-family="Georgia, serif" font-size="76" font-weight="900" fill="#c01525" text-anchor="end">A</text>
+      <!-- Heart Pip -->
+      <path d="M142 532 C118 526 100 515 83 496 C64 476 56 459 50 427 C36 360 74 278 169 168 L196 137 L250 185 C349 272 402 344 416 411 C420 427 420 448 416 462 C409 491 391 517 364 532 C345 541 320 545 305 542 C290 542 266 536 250 528 C231 519 199 487 184 462 L180 455 L165 476 C143 506 123 523 103 529 C92 532 79 534 69 532 Z"
+            fill="#c01525" transform="translate(300, 180) scale(0.24)"/>
+    </g>
+
+    <!-- CARD 3 (HERO FOREGROUND): THE TWO OF CLUBS (2♣ OPENING LEAD) -->
+    <g transform="translate(256, 265)" filter="url(#shadowLead3)">
+      <!-- Card Body with Gold Rim Accenting the Mandatory Lead -->
+      <rect x="-115" y="-165" width="230" height="330" rx="18" fill="url(#cardStock3)" stroke="#fbbf24" stroke-width="3.5"/>
+      <rect x="-107" y="-157" width="214" height="314" rx="12" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="1.5"/>
+
+      <!-- Giant Didone Rank '2' Top-Left -->
+      <text x="-94" y="-76" font-family="Georgia, serif" font-size="94" font-weight="900" fill="#1b0a0a">2</text>
+      
+      <!-- Small Club Pip below rank -->
+      <path d="M115 235 C98 225 91 209 94 187 C95 178 98 172 105 164 C119 148 117 146 99 155 C76 166 49 157 37 135 C33 128 33 101 37 94 C47 77 60 70 80 70 C96 70 113 80 121 92 C127 103 129 102 129 88 C129 69 116 35 109 35 L106 35 L136 35 L166 35 L163 42 C158 46 149 65 148 75 C144 98 143 105 145 105 C146 105 152 99 158 93 C172 78 180 75 197 75 C212 75 222 80 232 94 C239 102 240 105 240 121 C240 136 239 140 234 146 C220 164 196 169 176 159 C167 155 159 153 159 155 C159 156 163 161 169 167 C183 183 186 195 183 216 C178 228 170 237 161 241 C150 247 127 246 116 240 Z"
+            fill="#1b0a0a" transform="translate(-94, -58) scale(0.24)"/>
+
+      <!-- Big Center Traced Club -->
+      <path d="M270 551 C233 541 204 510 195 472 C191 456 192 431 196 413 C201 391 213 372 233 352 C248 337 253 330 248 327 C246 326 235 330 222 337 C178 358 139 360 103 343 C37 312 25 214 79 160 C95 144 114 134 138 129 C184 119 238 144 269 189 C284 211 286 208 285 168 C283 108 268 64 240 37 L226 24 L308 24 L390 24 L376 37 C349 63 334 105 332 163 C331 202 334 205 348 185 C379 140 433 115 479 125 C540 138 584 195 577 258 C570 311 530 357 477 368 C458 372 439 370 421 360 C412 355 402 352 399 354 C394 358 399 368 414 384 C471 441 463 534 397 576 C376 590 350 595 318 596 C298 597 286 595 276 592 Z"
+            fill="#1b0a0a" transform="translate(-16, -65) scale(0.35)"/>
+    </g>
+
+    <!-- Banner Tag: 2♣ OPENING LEAD -->
+    <g transform="translate(256, 452)">
+      <rect x="-105" y="-20" width="210" height="40" rx="20" fill="#092017" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="0" y="7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+            font-size="16" font-weight="900" fill="#fde68a" text-anchor="middle" letter-spacing="1.5">2♣ OPENING LEAD</text>
+    </g>
+  </g>
+</svg>

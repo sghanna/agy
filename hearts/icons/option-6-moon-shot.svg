@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Midnight Felt Gradient -->
+    <radialGradient id="nightFelt6" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#143a29"/>
+      <stop offset="45%" stop-color="#091d14"/>
+      <stop offset="75%" stop-color="#050e0a"/>
+      <stop offset="100%" stop-color="#020704"/>
+    </radialGradient>
+
+    <!-- Celestial Moon Gold Gradient -->
+    <linearGradient id="moonGold6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="25%" stop-color="#fef08a"/>
+      <stop offset="60%" stop-color="#fbbf24"/>
+      <stop offset="85%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+
+    <!-- Ruby Heart Gradient -->
+    <radialGradient id="rubyGrad6" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="30%" stop-color="#ef4444"/>
+      <stop offset="65%" stop-color="#c01525"/>
+      <stop offset="88%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#450a0a"/>
+    </radialGradient>
+
+    <!-- Shadow & Glow Filters -->
+    <filter id="moonGlow6" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="#fbbf24" flood-opacity="0.6"/>
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+
+    <filter id="heartShadow6" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.75"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#c01525" flood-opacity="0.5"/>
+    </filter>
+
+    <clipPath id="squircleClip6">
+      <rect x="0" y="0" width="512" height="512" rx="115"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircleClip6)">
+    <!-- Midnight Felt Background -->
+    <rect width="512" height="512" fill="url(#nightFelt6)"/>
+
+    <!-- Subtle Golden Felt Border -->
+    <rect x="14" y="14" width="484" height="484" rx="102" fill="none" stroke="#fbbf24" stroke-width="2" stroke-opacity="0.3"/>
+    <rect x="22" y="22" width="468" height="468" rx="94" fill="none" stroke="#fbbf24" stroke-width="1" stroke-dasharray="5,4" stroke-opacity="0.2"/>
+
+    <!-- Celestial Starlight Constellations (13 Golden Stars = 13 Conquered Hearts) -->
+    <g fill="#fbbf24" opacity="0.85">
+      <!-- 13 Stars positioned in an arc around the crown -->
+      <!-- Star 1 -->
+      <polygon points="120,95 123,103 131,104 125,110 127,118 120,113 113,118 115,110 109,104 117,103" transform="scale(0.8) translate(20, 10)"/>
+      <!-- Star 2 -->
+      <polygon points="160,75 163,83 171,84 165,90 167,98 160,93 153,98 155,90 149,84 157,83" transform="scale(0.8) translate(35, 8)"/>
+      <!-- Star 3 -->
+      <polygon points="210,62 213,70 221,71 215,77 217,85 210,80 203,85 205,77 199,71 207,70" transform="scale(0.8) translate(50, 5)"/>
+      <!-- Star 4 -->
+      <polygon points="265,55 268,63 276,64 270,70 272,78 265,73 258,78 260,70 254,64 262,63" transform="scale(0.8) translate(65, 3)"/>
+      <!-- Star 5 -->
+      <polygon points="320,62 323,70 331,71 325,77 327,85 320,80 313,85 315,77 309,71 317,70" transform="scale(0.8) translate(80, 5)"/>
+      <!-- Star 6 -->
+      <polygon points="370,75 373,83 381,84 375,90 377,98 370,93 363,98 365,90 359,84 367,83" transform="scale(0.8) translate(95, 8)"/>
+      <!-- Star 7 -->
+      <polygon points="415,98 418,106 426,107 420,113 422,121 415,116 408,121 410,113 404,107 412,106" transform="scale(0.8) translate(105, 12)"/>
+      <!-- Flanking stars -->
+      <circle cx="85" cy="180" r="3" fill="#fef08a" opacity="0.6"/>
+      <circle cx="70" cy="240" r="2" fill="#fef08a" opacity="0.5"/>
+      <circle cx="430" cy="180" r="3" fill="#fef08a" opacity="0.6"/>
+      <circle cx="445" cy="240" r="2" fill="#fef08a" opacity="0.5"/>
+      <circle cx="95" cy="340" r="2.5" fill="#fef08a" opacity="0.5"/>
+      <circle cx="420" cy="340" r="2.5" fill="#fef08a" opacity="0.5"/>
+    </g>
+
+    <!-- Faint Golden Orbit Ring -->
+    <ellipse cx="256" cy="256" rx="195" ry="195" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,6" stroke-opacity="0.3"/>
+
+    <!-- THE GOLDEN CRESCENT MOON (Luminous curved cradle) -->
+    <g filter="url(#moonGlow6)">
+      <!-- Crescent Moon Path: Outer sweep 150 radius, inner sweep 135 radius -->
+      <path d="M 285 95 
+               A 165 165 0 1 0 405 345 
+               A 152 152 0 1 1 285 95 Z" 
+            fill="url(#moonGold6)" stroke="#fef08a" stroke-width="2"/>
+    </g>
+
+    <!-- THE RADIANT RUBY HEART (Cradled inside the Crescent Moon) -->
+    <g filter="url(#heartShadow6)">
+      <!-- Heart Path -->
+      <path d="M142 532 C118 526 100 515 83 496 C64 476 56 459 50 427 C36 360 74 278 169 168 L196 137 L250 185 C349 272 402 344 416 411 C420 427 420 448 416 462 C409 491 391 517 364 532 C345 541 320 545 305 542 C290 542 266 536 250 528 C231 519 199 487 184 462 L180 455 L165 476 C143 506 123 523 103 529 C92 532 79 534 69 532 Z"
+            fill="url(#rubyGrad6)" stroke="#fbbf24" stroke-width="3"
+            transform="translate(135, 130) scale(0.48)"/>
+
+      <!-- Heart Specular Light Glint -->
+      <ellipse cx="215" cy="210" rx="30" ry="16" fill="rgba(255,255,255,0.42)" transform="rotate(-30 215 210)"/>
+      <circle cx="198" cy="195" r="7" fill="rgba(255,255,255,0.65)"/>
+    </g>
+
+    <!-- Little Queen of Spades Silhouette Accompanying Heart Inside Moon -->
+    <g transform="translate(325, 290) scale(0.12)" filter="url(#heartShadow6)">
+      <path d="M269 543 C251 506 239 491 176 428 C143 395 109 360 100 350 C78 326 57 293 48 270 C41 251 41 247 41 214 C41 179 41 177 48 164 C58 145 78 125 97 116 C155 88 215 111 245 172 C257 197 260 193 255 159 C250 118 241 92 222 65 L214 53 L270 53 C326 53 326 53 318 65 C299 92 290 118 285 159 C280 193 283 197 295 172 C325 111 385 88 443 116 C462 125 482 145 492 164 C499 177 499 179 499 214 C499 247 499 251 492 270 C483 293 462 326 440 350 C431 360 397 395 364 428 C301 491 289 506 271 543 Z"
+            fill="#fbbf24"/>
+    </g>
+
+    <!-- Bottom Legend Badge: "SHOOT THE MOON" -->
+    <g transform="translate(256, 452)" filter="url(#moonGlow6)">
+      <rect x="-115" y="-20" width="230" height="40" rx="20" fill="#04120b" stroke="url(#moonGold6)" stroke-width="2"/>
+      <text x="0" y="6" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+            font-size="16" font-weight="900" fill="#fffbeb" text-anchor="middle" letter-spacing="3">SHOOT THE MOON</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Emerald Table Felt Background -->
+    <radialGradient id="feltBgC3" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#1f543b"/>
+      <stop offset="60%" stop-color="#0e2a1d"/>
+      <stop offset="100%" stop-color="#05140d"/>
+    </radialGradient>
+
+    <!-- Card Stock Gradient -->
+    <linearGradient id="cardStockC3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#faf9f4"/>
+      <stop offset="100%" stop-color="#ebebe3"/>
+    </linearGradient>
+
+    <!-- Ruby Heart Gradient -->
+    <radialGradient id="rubyGradC3" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="30%" stop-color="#c01525"/>
+      <stop offset="85%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#4c0519"/>
+    </radialGradient>
+
+    <!-- Natural Card Drop Shadows -->
+    <filter id="shadowSpadeC3" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="-6" dy="12" stdDeviation="12" flood-color="#000000" flood-opacity="0.65"/>
+    </filter>
+    <filter id="shadowHeartC3" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="8" dy="16" stdDeviation="15" flood-color="#000000" flood-opacity="0.75"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#fbbf24" flood-opacity="0.3"/>
+    </filter>
+
+    <clipPath id="squircleClipC3">
+      <rect x="0" y="0" width="512" height="512" rx="115"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircleClipC3)">
+    <!-- Deep Emerald Table Felt -->
+    <rect width="512" height="512" fill="url(#feltBgC3)"/>
+
+    <!-- Subtle Golden Felt Fillet -->
+    <rect x="16" y="16" width="480" height="480" rx="100" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-opacity="0.35"/>
+    <rect x="24" y="24" width="464" height="464" rx="92" fill="none" stroke="#fbbf24" stroke-width="1" stroke-dasharray="6,4" stroke-opacity="0.25"/>
+
+    <!-- CARD 1: THE SPADE CARD (Back Left, -12deg) -->
+    <g transform="translate(160, 260) rotate(-12) translate(-160, -260)" filter="url(#shadowSpadeC3)">
+      <!-- Card Body -->
+      <rect x="65" y="80" width="220" height="330" rx="18" fill="url(#cardStockC3)" stroke="#787b74" stroke-width="2.5"/>
+      <rect x="73" y="88" width="204" height="314" rx="12" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="1.5"/>
+
+      <!-- Large Center Spade Pip (NO TEXT) -->
+      <path d="M269 543 C251 506 239 491 176 428 C143 395 109 360 100 350 C78 326 57 293 48 270 C41 251 41 247 41 214 C41 179 41 177 48 164 C58 145 78 125 97 116 C155 88 215 111 245 172 C257 197 260 193 255 159 C250 118 241 92 222 65 L214 53 L270 53 C326 53 326 53 318 65 C299 92 290 118 285 159 C280 193 283 197 295 172 C325 111 385 88 443 116 C462 125 482 145 492 164 C499 177 499 179 499 214 C499 247 499 251 492 270 C483 293 462 326 440 350 C431 360 397 395 364 428 C301 491 289 506 271 543 Z"
+            fill="#1b0a0a" transform="translate(108, 165) scale(0.24)"/>
+
+      <!-- Corner Mini Spade Pip -->
+      <path d="M269 543 C251 506 239 491 176 428 C143 395 109 360 100 350 C78 326 57 293 48 270 C41 251 41 247 41 214 C41 179 41 177 48 164 C58 145 78 125 97 116 C155 88 215 111 245 172 C257 197 260 193 255 159 C250 118 241 92 222 65 L214 53 L270 53 C326 53 326 53 318 65 C299 92 290 118 285 159 C280 193 283 197 295 172 C325 111 385 88 443 116 C462 125 482 145 492 164 C499 177 499 179 499 214 C499 247 499 251 492 270 C483 293 462 326 440 350 C431 360 397 395 364 428 C301 491 289 506 271 543 Z"
+            fill="#1b0a0a" transform="translate(85, 102) scale(0.08)"/>
+    </g>
+
+    <!-- CARD 2: THE HEART CARD (Front Right, +8deg) -->
+    <g transform="translate(335, 255) rotate(8) translate(-335, -255)" filter="url(#shadowHeartC3)">
+      <!-- Card Body with subtle gold edge accent -->
+      <rect x="225" y="80" width="220" height="330" rx="18" fill="url(#cardStockC3)" stroke="#c01525" stroke-width="2.5"/>
+      <rect x="233" y="88" width="204" height="314" rx="12" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="1.5"/>
+
+      <!-- Large Center Sculpted Heart Pip (NO TEXT) -->
+      <g transform="translate(245, 150) scale(0.35)">
+        <path d="M 256 425 C 130 320 65 240 65 155 C 65 85 118 42 185 42 C 226 42 248 68 256 84 C 264 68 286 42 327 42 C 394 42 447 85 447 155 C 447 240 382 320 256 425 Z" 
+              fill="url(#rubyGradC3)" stroke="#7f1d1d" stroke-width="4"/>
+        <ellipse cx="195" cy="140" rx="36" ry="20" fill="rgba(255, 255, 255, 0.45)" transform="rotate(-30 195 140)"/>
+        <circle cx="170" cy="122" r="8" fill="rgba(255, 255, 255, 0.7)"/>
+      </g>
+
+      <!-- Corner Mini Heart Pip -->
+      <g transform="translate(245, 102) scale(0.08)">
+        <path d="M 256 425 C 130 320 65 240 65 155 C 65 85 118 42 185 42 C 226 42 248 68 256 84 C 264 68 286 42 327 42 C 394 42 447 85 447 155 C 447 240 382 320 256 425 Z" 
+              fill="#c01525"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 # Solitaire for Low Vision: Product & Design Case Study
 
-**Live Web App:** [sghanna.github.io/agy-solitaire/](https://sghanna.github.io/agy-solitaire/)  
-**Repository:** [github.com/sghanna/agy-solitaire](https://github.com/sghanna/agy-solitaire)  
+**Live Web App:** [sghanna.github.io/agy/solitaire/](https://sghanna.github.io/agy/solitaire/)  
+**Repository:** [github.com/sghanna/agy](https://github.com/sghanna/agy)  
 **Role:** Product Owner & Design Lead  
 **Collaborators:** AI Coding Assistants (Google Antigravity, Anthropic Claude, OpenAI Codex)  
 **Target User:** 78-year-old player with monocular vision and vitreal floaters  
@@ -93,7 +93,27 @@ AI coding models default to "textbook" design patterns that frequently fail real
 - **The Design Override**:
   - Established a **strict English default policy**: The game always initializes in English unless the player deliberately chooses Spanish or Vietnamese in the in-game Settings menu.
   - Eliminated unreliable device language sniffing in favor of explicit user agency.
-  - Isolated player preferences under a dedicated key (`agy_solitaire_user_lang`) and switched review iframes to stateless URL parameters (`?lang=`), ensuring demo environments never corrupt the user's saved experience.
+### J. Playable vs. Unplayable Affordance (The Strategic Contrast Rule in Hearts)
+- **The Problem**: When expanding from single-player Solitaire to the 4-player trick-taking game of Hearts, AI models defaulted to wrapping playable cards in loud, glowing colored outlines or neon selection boxes. Across a 13-card hand, having 6 to 10 cards glowing simultaneously overwhelmed my mother's peripheral vision, creating sensory overload and obscuring card ranks.
+- **The Design Override**: I reversed the visual affordance model:
+  - Playable cards are left completely natural, clean, and crisp.
+  - Unplayable / non-selectable cards receive a subtle dark overlay (25% black: `rgba(0,0,0,0.25)`).
+  - *Crucial Low-Vision Insight*: In trick-taking card games, unplayable cards still possess critical strategic value (counting cards, tracking remaining suits, planning discards). They must never be washed out or made illegible.
+
+### K. Low-Vision Color Contrast Under Tint (The Imperial Carmine Selection)
+- **The Problem**: Applying the 25% darkening veil to unplayable cards caused standard crimson red inks (`#b91c1c`, `#c8102e`) to drop to ~4.1:1 contrast against ivory card stock, failing WCAG AAA requirements and blurring into dark gray for my mother's eye floaters.
+- **The Design Override**: I conducted an empirical contrast bake-off across 8 shades of red under various scrim opacities. I selected **Imperial Carmine (`#c01525`)**, which boosted contrast by **+11%** over standard crimson, achieving a **>7:1 WCAG AAA** contrast ratio even under the 25% darkening overlay.
+
+### L. iPhone Home Screen App Icon Discipline (The Zero-Text Standard)
+- **The Problem**: Initial AI proposals for the Hearts PWA app icon ("Add to Home Screen") were overloaded with text ribbons ("HEARTS"), card rank letters ("A", "Q", "2"), and score pills ("13 POINTS"). At 60×60px on an iPhone Home Screen at arm's length, this micro-typography devolved into illegible, blurry smudges.
+- **The Design Override**: I mandated a strict **zero-text policy**:
+  - Eliminated all words, letters, rank indices, and numbers from the icon artwork.
+  - Required pure, high-contrast playing card iconography (bold suit geometry and card silhouettes).
+  - Enforced full-bleed opaque backgrounds (512×512 square) to eliminate Apple's automatic black corner fills, ensuring continuous, seamless squircle curvature on iOS.
+
+### M. Trick-Taking Rules Integrity & Automated Simulation (The Mandatory 2♣ Lead)
+- **The Problem**: Early AI implementations permitted the dealer or human to lead arbitrary cards on the opening trick, violating official Hearts rules.
+- **The Design Override**: I enforced rigorous compliance with official rules: the player holding the **2 of Clubs (2♣)** must lead trick 1, and no penalty cards ("blood") may be played on the first trick. To ensure bulletproof reliability before user testing, we verified the rules engine across **52,000+ automated simulated tricks**, ensuring flawless Moon Shot detection (+26 to all opponents) and trick resolution.
 
 ---
 

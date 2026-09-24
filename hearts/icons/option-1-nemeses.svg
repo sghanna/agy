@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="feltBg1" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#1f5139"/>
+      <stop offset="60%" stop-color="#0f2e20"/>
+      <stop offset="100%" stop-color="#06160e"/>
+    </radialGradient>
+
+    <!-- Card Stock Gradient -->
+    <linearGradient id="cardStock1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#fdfdf9"/>
+      <stop offset="100%" stop-color="#ecebe3"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="shadowQ1" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="-4" dy="12" stdDeviation="12" flood-color="#000000" flood-opacity="0.65"/>
+    </filter>
+    <filter id="shadowA1" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="6" dy="16" stdDeviation="14" flood-color="#000000" flood-opacity="0.75"/>
+    </filter>
+    <filter id="goldGlow1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#fbbf24" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Squircle Clip -->
+    <clipPath id="squircleClip1">
+      <rect x="0" y="0" width="512" height="512" rx="115"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircleClip1)">
+    <!-- Deep Emerald Felt Background -->
+    <rect width="512" height="512" fill="url(#feltBg1)"/>
+
+    <!-- Subtle Golden Felt Border -->
+    <rect x="14" y="14" width="484" height="484" rx="102" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-opacity="0.35"/>
+    <rect x="22" y="22" width="468" height="468" rx="94" fill="none" stroke="#fbbf24" stroke-width="1" stroke-dasharray="6,4" stroke-opacity="0.25"/>
+
+    <!-- CARD 1: QUEEN OF SPADES (Left, Angled -10deg) -->
+    <g transform="translate(145, 275) rotate(-10) translate(-145, -275)" filter="url(#shadowQ1)">
+      <!-- Card Body -->
+      <rect x="55" y="105" width="220" height="330" rx="18" fill="url(#cardStock1)" stroke="#787b74" stroke-width="2.5"/>
+      <rect x="62" y="112" width="206" height="316" rx="12" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/>
+      
+      <!-- Rank Q -->
+      <text x="76" y="180" font-family="Georgia, serif" font-size="76" font-weight="900" fill="#1b0a0a">Q</text>
+      <!-- Small Spade Pip -->
+      <path d="M102 245 C98 238 86 224 68 208 C40 182 20 158 20 150 C20 148 19 146 17 145 C13 143 14 118 19 110 C24 100 35 92 48 88 C65 83 80 91 96 112 L99 116 L97 104 C96 97 94 90 93 89 C92 87 91 85 91 83 L86 71 L94 71 C102 71 106 72 106 75 C106 77 105 79 104 79 C101 79 95 90 90 103 C86 115 85 130 89 130 C90 130 91 128 91 126 C91 124 95 118 100 113 C110 102 126 97 138 101 C162 108 169 119 169 144 C169 169 162 180 124 217 C103 238 82 264 82 270 C82 277 77 274 71 263 Z"
+            fill="#1b0a0a" transform="translate(74, 195) scale(0.24)"/>
+
+      <!-- Center Big Spade -->
+      <path d="M269 543 C251 506 239 491 176 428 C143 395 109 360 100 350 C78 326 57 293 48 270 C41 251 41 247 41 214 C41 179 41 177 48 164 C58 145 78 125 97 116 C155 88 215 111 245 172 C257 197 260 193 255 159 C250 118 241 92 222 65 L214 53 L270 53 C326 53 326 53 318 65 C299 92 290 118 285 159 C280 193 283 197 295 172 C325 111 385 88 443 116 C462 125 482 145 492 164 C499 177 499 179 499 214 C499 247 499 251 492 270 C483 293 462 326 440 350 C431 360 397 395 364 428 C301 491 289 506 271 543 Z"
+            fill="#1b0a0a" transform="translate(100, 235) scale(0.24)"/>
+    </g>
+
+    <!-- CARD 2: ACE OF HEARTS (Right, Angled +8deg, Elevated) -->
+    <g transform="translate(345, 260) rotate(8) translate(-345, -260)" filter="url(#shadowA1)">
+      <!-- Card Body -->
+      <rect x="235" y="75" width="220" height="330" rx="18" fill="url(#cardStock1)" stroke="#787b74" stroke-width="2.5"/>
+      <rect x="242" y="82" width="206" height="316" rx="12" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/>
+      
+      <!-- Rank A in Imperial Carmine -->
+      <text x="256" y="152" font-family="Georgia, serif" font-size="78" font-weight="900" fill="#c01525">A</text>
+      <!-- Small Heart Pip -->
+      <path d="M61 234 C50 230 35 214 35 207 C35 205 34 202 32 201 C29 199 31 168 35 160 C54 119 67 101 108 60 L135 34 L155 52 C196 89 222 124 238 163 C241 172 242 197 238 199 C237 200 236 202 236 204 C236 210 225 224 216 230 C209 235 203 236 189 236 C174 236 170 235 161 229 C155 225 147 217 142 211 L133 200 L124 211 C113 227 103 233 86 235 C76 236 68 235 61 234 Z"
+            fill="#c01525" transform="translate(254, 168) scale(0.25)"/>
+
+      <!-- Center Big Heart (Imperial Carmine #c01525) -->
+      <path d="M142 532 C118 526 100 515 83 496 C64 476 56 459 50 427 C36 360 74 278 169 168 L196 137 L250 185 C349 272 402 344 416 411 C420 427 420 448 416 462 C409 491 391 517 364 532 C345 541 320 545 305 542 C290 542 266 536 250 528 C231 519 199 487 184 462 L180 455 L165 476 C143 506 123 523 103 529 C92 532 79 534 69 532 Z"
+            fill="#c01525" transform="translate(262, 195) scale(0.38)"/>
+    </g>
+
+    <!-- Bottom Gold Title Ribbon / Brand Plaque -->
+    <g transform="translate(256, 452)" filter="url(#goldGlow1)">
+      <rect x="-110" y="-22" width="220" height="44" rx="22" fill="#092017" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="0" y="7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+            font-size="20" font-weight="900" fill="#fff7df" text-anchor="middle" letter-spacing="3">HEARTS</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Card Stock Surface Gradient -->
+    <radialGradient id="cardFace5" cx="30%" cy="25%" r="85%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#fdfcf7"/>
+      <stop offset="85%" stop-color="#f5f2e6"/>
+      <stop offset="100%" stop-color="#e8e3d1"/>
+    </radialGradient>
+
+    <!-- Ruby Heart Gradient -->
+    <radialGradient id="rubyGrad5" cx="32%" cy="28%" r="70%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="25%" stop-color="#dc2626"/>
+      <stop offset="60%" stop-color="#c01525"/>
+      <stop offset="85%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#4c0519"/>
+    </radialGradient>
+
+    <!-- Gold Foil Gradients -->
+    <linearGradient id="goldGrad5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="35%" stop-color="#fbbf24"/>
+      <stop offset="70%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="heartShadow5" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#580812" flood-opacity="0.55"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+
+    <filter id="borderGlow5" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+
+    <clipPath id="squircleClip5">
+      <rect x="0" y="0" width="512" height="512" rx="115"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircleClip5)">
+    <!-- Full-Bleed Vintage Ivory Playing Card Base -->
+    <rect width="512" height="512" fill="url(#cardFace5)"/>
+
+    <!-- Subtle Inset Edge Shadow to give physical card tactile thickness -->
+    <rect x="0" y="0" width="512" height="512" rx="115" fill="none" stroke="#d5cebd" stroke-width="6"/>
+
+    <!-- Ornate Double Fillet Inset Border (Cantonese / Vintage Didone Style) -->
+    <rect x="24" y="24" width="464" height="464" rx="92" fill="none" stroke="url(#goldGrad5)" stroke-width="4" filter="url(#borderGlow5)"/>
+    <rect x="34" y="34" width="444" height="444" rx="82" fill="none" stroke="#c01525" stroke-width="1.8" stroke-opacity="0.75"/>
+    <rect x="42" y="42" width="428" height="428" rx="74" fill="none" stroke="url(#goldGrad5)" stroke-width="1.2" stroke-dasharray="5,4" stroke-opacity="0.8"/>
+
+    <!-- Corner Filigree Flourishes -->
+    <!-- Top-Left Corner Ornament -->
+    <path d="M50 85 C65 85 85 65 85 50" fill="none" stroke="url(#goldGrad5)" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="85" cy="50" r="3" fill="#d97706"/>
+    <!-- Top-Right Corner Ornament -->
+    <path d="M462 85 C447 85 427 65 427 50" fill="none" stroke="url(#goldGrad5)" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="427" cy="50" r="3" fill="#d97706"/>
+    <!-- Bottom-Left Corner Ornament -->
+    <path d="M50 427 C65 427 85 447 85 462" fill="none" stroke="url(#goldGrad5)" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="85" cy="462" r="3" fill="#d97706"/>
+    <!-- Bottom-Right Corner Ornament -->
+    <path d="M462 427 C447 427 427 447 427 462" fill="none" stroke="url(#goldGrad5)" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="427" cy="462" r="3" fill="#d97706"/>
+
+    <!-- TOP-LEFT INDEX: Bodoni / Didone Bold 'A' -->
+    <g transform="translate(68, 62)">
+      <text x="0" y="82" font-family="'Bodoni MT', 'Didot', 'Georgia', serif" font-size="94" font-weight="900" fill="#c01525" letter-spacing="-2">A</text>
+      <!-- Small Corner Heart Pip -->
+      <path d="M142 532 C118 526 100 515 83 496 C64 476 56 459 50 427 C36 360 74 278 169 168 L196 137 L250 185 C349 272 402 344 416 411 C420 427 420 448 416 462 C409 491 391 517 364 532 C345 541 320 545 305 542 C290 542 266 536 250 528 C231 519 199 487 184 462 L180 455 L165 476 C143 506 123 523 103 529 C92 532 79 534 69 532 Z"
+            fill="#c01525" transform="translate(6, 100) scale(0.13)"/>
+    </g>
+
+    <!-- BOTTOM-RIGHT INDEX: Inverted Bodoni / Didone Bold 'A' -->
+    <g transform="translate(444, 450) rotate(180)">
+      <text x="0" y="82" font-family="'Bodoni MT', 'Didot', 'Georgia', serif" font-size="94" font-weight="900" fill="#c01525" letter-spacing="-2">A</text>
+      <!-- Small Inverted Heart Pip -->
+      <path d="M142 532 C118 526 100 515 83 496 C64 476 56 459 50 427 C36 360 74 278 169 168 L196 137 L250 185 C349 272 402 344 416 411 C420 427 420 448 416 462 C409 491 391 517 364 532 C345 541 320 545 305 542 C290 542 266 536 250 528 C231 519 199 487 184 462 L180 455 L165 476 C143 506 123 523 103 529 C92 532 79 534 69 532 Z"
+            fill="#c01525" transform="translate(6, 100) scale(0.13)"/>
+    </g>
+
+    <!-- CENTER HERO SCULPTED RUBY HEART -->
+    <g filter="url(#heartShadow5)">
+      <!-- Gold halo ring behind center heart -->
+      <circle cx="256" cy="256" r="130" fill="none" stroke="url(#goldGrad5)" stroke-width="2.5" stroke-opacity="0.5"/>
+      <circle cx="256" cy="256" r="142" fill="none" stroke="url(#goldGrad5)" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.4"/>
+
+      <!-- Heart Silhouette with Ruby Bevel Gradient -->
+      <path d="M142 532 C118 526 100 515 83 496 C64 476 56 459 50 427 C36 360 74 278 169 168 L196 137 L250 185 C349 272 402 344 416 411 C420 427 420 448 416 462 C409 491 391 517 364 532 C345 541 320 545 305 542 C290 542 266 536 250 528 C231 519 199 487 184 462 L180 455 L165 476 C143 506 123 523 103 529 C92 532 79 534 69 532 Z"
+            fill="url(#rubyGrad5)" stroke="#7f1d1d" stroke-width="4"
+            transform="translate(138, 125) scale(0.51)"/>
+
+      <!-- Inner Jewel Specular Highlights -->
+      <ellipse cx="218" cy="205" rx="34" ry="18" fill="rgba(255,255,255,0.45)" transform="rotate(-32 218 205)"/>
+      <circle cx="198" cy="188" r="8" fill="rgba(255,255,255,0.7)"/>
+
+      <!-- Micro Crown / Filigree on Top Center Cleave of Heart -->
+      <path d="M246 198 L256 182 L266 198 Z" fill="url(#goldGrad5)"/>
+    </g>
+
+    <!-- Subtle Watermark / Vintage Brand Stamp Under Heart -->
+    <text x="256" y="415" font-family="'Didot', 'Georgia', serif" font-size="16" font-weight="700" fill="#a8a29e" text-anchor="middle" letter-spacing="4">NO. 1 VINTAGE DECK</text>
+  </g>
+</svg>

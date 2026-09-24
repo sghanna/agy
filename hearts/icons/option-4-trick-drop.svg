@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="feltBg4" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#23583e"/>
+      <stop offset="50%" stop-color="#123625"/>
+      <stop offset="100%" stop-color="#05140d"/>
+    </radialGradient>
+
+    <linearGradient id="cardStock4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#fdfdf9"/>
+      <stop offset="100%" stop-color="#ebebe3"/>
+    </linearGradient>
+
+    <filter id="trickShadow4" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="queenHighlight4" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.85"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="#fbbf24" flood-opacity="0.8"/>
+    </filter>
+
+    <clipPath id="squircleClip4">
+      <rect x="0" y="0" width="512" height="512" rx="115"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircleClip4)">
+    <!-- Deep Emerald Table Felt -->
+    <rect width="512" height="512" fill="url(#feltBg4)"/>
+    
+    <!-- Table Felt Inset Oval Line -->
+    <ellipse cx="256" cy="256" rx="210" ry="210" fill="none" stroke="#fbbf24" stroke-width="2" stroke-opacity="0.35"/>
+
+    <!-- CARD 1: 2 OF CLUBS (Bottom South Lead) -->
+    <g transform="translate(256, 360) rotate(0) translate(-256, -360)" filter="url(#trickShadow4)">
+      <rect x="186" y="275" width="140" height="200" rx="12" fill="url(#cardStock4)" stroke="#787b74" stroke-width="1.8"/>
+      <text x="202" y="325" font-family="Georgia, serif" font-size="52" font-weight="900" fill="#1b0a0a">2</text>
+      <circle cx="214" cy="355" r="8" fill="#1b0a0a"/>
+    </g>
+
+    <!-- CARD 2: KING OF CLUBS (Left West) -->
+    <g transform="translate(140, 240) rotate(-22) translate(-140, -240)" filter="url(#trickShadow4)">
+      <rect x="70" y="140" width="140" height="200" rx="12" fill="url(#cardStock4)" stroke="#787b74" stroke-width="1.8"/>
+      <text x="86" y="190" font-family="Georgia, serif" font-size="52" font-weight="900" fill="#1b0a0a">K</text>
+      <circle cx="98" cy="220" r="8" fill="#1b0a0a"/>
+    </g>
+
+    <!-- CARD 3: 10 OF CLUBS (Top North) -->
+    <g transform="translate(256, 130) rotate(8) translate(-256, -130)" filter="url(#trickShadow4)">
+      <rect x="186" y="40" width="140" height="200" rx="12" fill="url(#cardStock4)" stroke="#787b74" stroke-width="1.8"/>
+      <text x="202" y="90" font-family="Georgia, serif" font-size="46" font-weight="900" fill="#1b0a0a">10</text>
+      <circle cx="214" cy="115" r="8" fill="#1b0a0a"/>
+    </g>
+
+    <!-- CARD 4 (HERO CLIMAX): QUEEN OF SPADES (Dropping into the center!) -->
+    <g transform="translate(290, 240) rotate(14) translate(-290, -240)" filter="url(#queenHighlight4)">
+      <!-- Golden Aura Border for the Queen Drop -->
+      <rect x="200" y="130" width="170" height="240" rx="14" fill="url(#cardStock4)" stroke="#fbbf24" stroke-width="4"/>
+      <rect x="206" y="136" width="158" height="228" rx="10" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/>
+
+      <!-- Rank Q -->
+      <text x="220" y="195" font-family="Georgia, serif" font-size="68" font-weight="900" fill="#1b0a0a">Q</text>
+      
+      <!-- Big Center Black Spade -->
+      <path d="M269 543 C251 506 239 491 176 428 C143 395 109 360 100 350 C78 326 57 293 48 270 C41 251 41 247 41 214 C41 179 41 177 48 164 C58 145 78 125 97 116 C155 88 215 111 245 172 C257 197 260 193 255 159 C250 118 241 92 222 65 L214 53 L270 53 C326 53 326 53 318 65 C299 92 290 118 285 159 C280 193 283 197 295 172 C325 111 385 88 443 116 C462 125 482 145 492 164 C499 177 499 179 499 214 C499 247 499 251 492 270 C483 293 462 326 440 350 C431 360 397 395 364 428 C301 491 289 506 271 543 Z"
+            fill="#1b0a0a" transform="translate(245, 205) scale(0.18)"/>
+
+      <!-- Small 13 PTS Pill -->
+      <rect x="225" y="325" width="120" height="26" rx="13" fill="#b91c1c" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="285" y="343" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+            font-size="13" font-weight="900" fill="#fef08a" text-anchor="middle" letter-spacing="1">13 POINTS!</text>
+    </g>
+
+    <!-- Bottom Capsule: HEARTS -->
+    <g transform="translate(256, 458)">
+      <rect x="-85" y="-18" width="170" height="36" rx="18" fill="#092017" stroke="#fbbf24" stroke-width="2"/>
+      <text x="0" y="6" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+            font-size="16" font-weight="900" fill="#fff7df" text-anchor="middle" letter-spacing="3">HEARTS</text>
+    </g>
+  </g>
+</svg>

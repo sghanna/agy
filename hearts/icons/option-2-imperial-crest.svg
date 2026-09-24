@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="feltBg2" cx="40%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#1f5139"/>
+      <stop offset="60%" stop-color="#0e2a1d"/>
+      <stop offset="100%" stop-color="#05140d"/>
+    </radialGradient>
+
+    <!-- Gold Gradients -->
+    <linearGradient id="goldGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="40%" stop-color="#fbbf24"/>
+      <stop offset="85%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+
+    <!-- Ruby Heart Gradient -->
+    <radialGradient id="rubyGrad2" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="35%" stop-color="#c01525"/>
+      <stop offset="80%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#450a0a"/>
+    </radialGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="medallionShadow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+    <filter id="heartGlow2" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.65"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="#fbbf24" flood-opacity="0.45"/>
+    </filter>
+
+    <clipPath id="squircleClip2">
+      <rect x="0" y="0" width="512" height="512" rx="115"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircleClip2)">
+    <!-- Deep Emerald Felt Background -->
+    <rect width="512" height="512" fill="url(#feltBg2)"/>
+
+    <!-- Concentric Gold Filigree Rings -->
+    <circle cx="256" cy="256" r="236" fill="none" stroke="#fbbf24" stroke-width="2" stroke-opacity="0.25"/>
+    <circle cx="256" cy="256" r="226" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="8,6" stroke-opacity="0.3"/>
+
+    <!-- IMPERIAL MEDALLION DISK -->
+    <g filter="url(#medallionShadow2)">
+      <!-- Outer Notched Sunburst Ring -->
+      <circle cx="256" cy="256" r="195" fill="#0b2418" stroke="url(#goldGrad2)" stroke-width="7"/>
+      <circle cx="256" cy="256" r="182" fill="none" stroke="#fbbf24" stroke-width="1.8" stroke-dasharray="4,4" stroke-opacity="0.6"/>
+
+      <!-- 16 Sunburst Radiance Teeth -->
+      <g stroke="url(#goldGrad2)" stroke-width="3" stroke-linecap="round" opacity="0.8">
+        <line x1="256" y1="65" x2="256" y2="78"/>
+        <line x1="256" y1="434" x2="256" y2="447"/>
+        <line x1="65" y1="256" x2="78" y2="256"/>
+        <line x1="434" y1="256" x2="447" y2="256"/>
+        <line x1="121" y1="121" x2="131" y2="131"/>
+        <line x1="381" y1="381" x2="391" y2="391"/>
+        <line x1="391" y1="121" x2="381" y2="131"/>
+        <line x1="131" y1="381" x2="121" y2="391"/>
+      </g>
+
+      <!-- Inner Textured Felt Bed -->
+      <circle cx="256" cy="256" r="170" fill="#0d281c" stroke="#fbbf24" stroke-width="1" stroke-opacity="0.4"/>
+    </g>
+
+    <!-- CENTERPIECE: CROWNED RUBY HEART -->
+    <g filter="url(#heartGlow2)">
+      <!-- Sculpted Ruby Heart -->
+      <path d="M256 395 C235 375 140 280 135 220 C130 160 175 130 220 145 C240 152 250 168 256 182 C262 168 272 152 292 145 C337 130 382 160 377 220 C372 280 277 375 256 395 Z"
+            fill="url(#rubyGrad2)" stroke="url(#goldGrad2)" stroke-width="4.5"/>
+
+      <!-- Inner Gem Facet Highlight -->
+      <path d="M256 375 C240 358 160 275 155 225 C150 178 185 154 220 165 C236 170 248 185 256 205 C264 185 276 170 292 165 C327 154 362 178 357 225 C352 275 272 358 256 375 Z"
+            fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="2"/>
+
+      <!-- Three-Peaked Imperial Gold Flame Crown -->
+      <g transform="translate(256, 126)">
+        <!-- Crown Base -->
+        <path d="M-60 16 L60 16 L48 30 L-48 30 Z" fill="url(#goldGrad2)" stroke="#92400e" stroke-width="1.5"/>
+        <!-- 3 Flame Peaks -->
+        <path d="M-52 16 L-42 -18 L-22 8 L0 -34 L22 8 L42 -18 L52 16 Z" fill="url(#goldGrad2)" stroke="#92400e" stroke-width="2"/>
+        <!-- Glowing Ruby Jewel on Center Peak -->
+        <circle cx="0" cy="-34" r="7" fill="#ef4444" stroke="#fef08a" stroke-width="2"/>
+        <circle cx="-42" cy="-18" r="5" fill="#ef4444" stroke="#fef08a" stroke-width="1.5"/>
+        <circle cx="42" cy="-18" r="5" fill="#ef4444" stroke="#fef08a" stroke-width="1.5"/>
+        <!-- Central Flaming Gold Pearl -->
+        <circle cx="0" cy="23" r="5" fill="#fef08a"/>
+      </g>
+    </g>
+
+    <!-- Bottom Arced Title: HEARTS -->
+    <g transform="translate(256, 442)">
+      <rect x="-85" y="-18" width="170" height="36" rx="18" fill="#071b11" stroke="url(#goldGrad2)" stroke-width="2"/>
+      <text x="0" y="6" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+            font-size="16.5" font-weight="900" fill="#fff7df" text-anchor="middle" letter-spacing="3.5">HEARTS</text>
+    </g>
+  </g>
+</svg>
