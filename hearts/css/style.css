@@ -551,23 +551,90 @@ html, body {
 
 .hand-area button.card.pass-selected .check-circle { display: block; }
 
-.hand-area button.card.received {
-  outline: 3px solid #f2d995;
-  outline-offset: 1px;
+/* ========================================================= */
+/* RECEIVED CARDS: VIBRANT SLIDE-IN & EMERALD GLOW          */
+/* ========================================================= */
+@keyframes slideDownIntoHand {
+  0% {
+    transform: translateY(-90px) scale(1.18);
+    opacity: 0;
+    box-shadow: 0 0 28px 8px rgba(16, 185, 129, 0.95);
+  }
+  60% {
+    transform: translateY(-4px) scale(1.06);
+    opacity: 1;
+    box-shadow: 0 0 22px 6px rgba(16, 185, 129, 0.9);
+  }
+  100% {
+    transform: translateY(-10px) scale(1.03);
+    opacity: 1;
+    box-shadow: 0 0 16px 4px rgba(16, 185, 129, 0.75), 0 8px 16px rgba(0,0,0,0.6);
+  }
 }
 
-.hand-area button.card.received::after {
-  content: "NEW";
+.hand-area button.card.received {
+  border: 2.5px solid #10b981 !important;
+  outline: 2px solid #6ee7b7 !important;
+  outline-offset: 1px;
+  animation: slideDownIntoHand 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  z-index: 38 !important;
+}
+
+.hand-area button.card .received-badge {
+  display: none;
   position: absolute;
-  bottom: -4px;
-  right: -4px;
-  padding: 1px 4px;
-  border-radius: 4px;
-  background: #16402c;
-  color: #fff;
-  border: 1px solid #f2d995;
-  font-size: 9px;
-  font-weight: 850;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #065f46;
+  color: #ecfdf5;
+  border: 1.5px solid #34d399;
+  border-radius: 9999px;
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 1px 7px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  letter-spacing: 0.4px;
+  pointer-events: none;
+  z-index: 60;
+}
+
+.hand-area button.card.received .received-badge {
+  display: block;
+}
+
+/* Intermediate table center reveal for received cards */
+.pass-reveal-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeInCenter 0.4s ease both;
+}
+
+.pass-reveal-title {
+  font: bold 16px Georgia, serif;
+  color: #a7f3d0;
+  text-shadow: 0 2px 4px #000;
+}
+
+.pass-reveal-cards {
+  display: flex;
+  gap: 10px;
+}
+
+.pass-reveal-card {
+  width: var(--table-card-w);
+  height: var(--table-card-h);
+  border-radius: 6px;
+  box-shadow: 0 0 18px 4px rgba(16, 185, 129, 0.8), 0 6px 14px rgba(0,0,0,0.7);
+  border: 2px solid #34d399;
+}
+
+@keyframes fadeInCenter {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 /* DIALOGS & MODALS */

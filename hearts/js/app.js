@@ -249,6 +249,7 @@
           ${svg}
           <div class="check-circle" aria-hidden="true">✓</div>
           <div class="play-badge" aria-hidden="true">TAP TO PLAY</div>
+          <div class="received-badge" aria-hidden="true">RECEIVED</div>
         </button>
       `;
     });
@@ -436,11 +437,43 @@
       engine.setPlayerPass(i, aiPass);
     }
 
-    playSound('play');
-    engine.executePass();
-    selectedPassCards = [];
-    saveGame();
-    updateControls();
+    const offset = engine.passDir.offset;
+    const senderId = (0 - offset + 4) % 4;
+    const senderName = window.HeartsEngine.PLAYERS[senderId].name;
+    const incomingCards = engine.pendingPasses[senderId];
+
+    // Step 1: Reveal incoming cards in table center
+    playSound('trick');
+    elStatus.textContent = `Incoming: 3 cards from ${senderName}`;
+    elInstruction.textContent = "Sliding into your hand...";
+    elPrimaryBtn.disabled = true;
+
+    let revealHTML = `
+      <div class="pass-reveal-box">
+        <div class="pass-reveal-title">From ${senderName}:</div>
+        <div class="pass-reveal-cards">
+    `;
+    for (const c of incomingCards) {
+      revealHTML += `
+        <div class="pass-reveal-card">
+          ${window.CardGlyphs.cardSVG(c.rank, c.suit, true)}
+        </div>
+      `;
+    }
+    revealHTML += `
+        </div>
+      </div>
+    `;
+    elTableCenter.innerHTML = revealHTML;
+
+    // Step 2: After 1.2s, execute pass and animate cards sliding down into hand
+    setTimeout(() => {
+      playSound('play');
+      engine.executePass();
+      selectedPassCards = [];
+      saveGame();
+      updateControls();
+    }, 1200);
   }
 
   function executeHumanPlay() {
