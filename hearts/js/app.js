@@ -13,6 +13,7 @@
   let soundEnabled = true;
   let activeResolvedTrick = null;
   let activeTrickWinnerPlay = null;
+  let justReceivedCards = false;
 
   // Web Audio Chimes
   let audioCtx = null;
@@ -132,8 +133,7 @@
       }
     });
 
-    const passShort = { 'Pass Left': 'Left', 'Pass Right': 'Right', 'Pass Across': 'Across', 'Hold Hand': 'Hold' }[engine.passDir.label] || engine.passDir.label;
-    elRoundStatus.textContent = `R${engine.roundNumber} · ${passShort}`;
+    elRoundStatus.textContent = `Hand ${engine.roundNumber}`;
   }
 
   function renderHand() {
@@ -238,11 +238,12 @@
       }
 
       const isReceived = card.isReceived;
+      const slideClass = (isReceived && justReceivedCards) ? 'sliding-in' : '';
       const ariaLabel = `${card.rank} of ${window.CardGlyphs.getSuitName(card.suit)}`;
       const svg = window.CardGlyphs.cardSVG(card.rank, card.suit, false);
 
       html += `
-        <button class="card ${cardStateClass} ${isReceived ? 'received' : ''}" id="card-${cardId}"
+        <button class="card ${cardStateClass} ${isReceived ? 'received' : ''} ${slideClass}" id="card-${cardId}"
           aria-label="${ariaLabel}" aria-pressed="${isSelected}"
           style="left:${x}px; top:${y}px; z-index:${z};"
           onclick="window.HeartsApp.handleCardClick('${cardId}')">
@@ -466,13 +467,32 @@
     `;
     elTableCenter.innerHTML = revealHTML;
 
-    // Step 2: After 1.2s, execute pass and animate cards sliding down into hand
+    // Step 2: After 1.2s, execute pass and animate cards sliding down into hand ONCE
     setTimeout(() => {
       playSound('play');
       engine.executePass();
       selectedPassCards = [];
       saveGame();
+
+      // Trigger one-time slide-in animation
+      justReceivedCards = true;
       updateControls();
+
+      // Clear slide-in flag after animation duration so future re-renders never animate again
+      setTimeout(() => {
+        justReceivedCards = false;
+      }, 1000);
+
+      // Settle received cards after 4.5s
+      setTimeout(() => {
+        if (engine.hands[0]) {
+          let hadReceived = false;
+          engine.hands[0].forEach(c => {
+            if (c.isReceived) { c.isReceived = false; hadReceived = true; }
+          });
+          if (hadReceived) updateControls();
+        }
+      }, 4500);
     }, 1200);
   }
 
@@ -480,6 +500,11 @@
     if (!selectedCardToPlay) return;
     const card = selectedCardToPlay;
     selectedCardToPlay = null;
+
+    // Settle received cards immediately when player makes their move
+    if (engine.hands[0]) {
+      engine.hands[0].forEach(c => { c.isReceived = false; });
+    }
 
     playSound('play');
     const result = engine.playCard(0, card);
@@ -523,8 +548,9 @@
   function handleTrickComplete(result) {
     const winnerName = window.HeartsEngine.PLAYERS[result.winnerId].name;
     const pts = result.points;
+    const isHuman = result.winnerId === 0;
     playSound('trick');
-    elStatus.textContent = `${winnerName} wins trick (${pts} pts)`;
+    elStatus.textContent = isHuman ? `You win the trick! (${pts} pts)` : `${winnerName} wins trick (${pts} pts)`;
     elInstruction.textContent = pts > 0 ? `Took ${pts} penalty points` : "Zero penalty points";
 
     // Spotlight trick cards and winner
@@ -536,6 +562,9 @@
     setTimeout(() => {
       activeResolvedTrick = null;
       activeTrickWinnerPlay = null;
+      if (engine.hands[0]) {
+        engine.hands[0].forEach(c => { c.isReceived = false; });
+      }
       if (result.roundEnd) {
         if (engine.isMatchOver) {
           playSound('fanfare');

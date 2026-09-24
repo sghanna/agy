@@ -1,4 +1,4 @@
-const CACHE_NAME = 'agy-hearts-v3';
+const CACHE_NAME = 'agy-hearts-v4';
 const ASSETS = [
   './',
   './index.html',

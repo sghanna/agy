@@ -576,8 +576,12 @@ html, body {
   border: 2.5px solid #10b981 !important;
   outline: 2px solid #6ee7b7 !important;
   outline-offset: 1px;
-  animation: slideDownIntoHand 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow: 0 0 16px 4px rgba(16, 185, 129, 0.75), 0 8px 16px rgba(0,0,0,0.6);
   z-index: 38 !important;
+}
+
+.hand-area button.card.sliding-in {
+  animation: slideDownIntoHand 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hand-area button.card .received-badge {
