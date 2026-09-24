@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hearts — For Mom</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Hearts">
+  <meta name="theme-color" content="#06130d">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<main class="game-container" aria-label="Hearts game for iPhone">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <!-- Option C: Imperial Dragon Medallion Crest -->
+      <svg class="crest" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="g-seal-c" cx="22" cy="22" r="18" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#18432d"/>
+            <stop offset="70%" stop-color="#0b2418"/>
+            <stop offset="100%" stop-color="#05140d"/>
+          </radialGradient>
+          <linearGradient id="g-gold-c" x1="4" y1="4" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#fef08a"/>
+            <stop offset="50%" stop-color="#fbbf24"/>
+            <stop offset="100%" stop-color="#b45309"/>
+          </linearGradient>
+          <linearGradient id="g-ruby-c" x1="22" y1="13" x2="22" y2="34" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ef4444"/>
+            <stop offset="60%" stop-color="#dc2626"/>
+            <stop offset="100%" stop-color="#991b1b"/>
+          </linearGradient>
+        </defs>
+        <!-- Sunburst Radiance Filigree Ring -->
+        <circle cx="22" cy="22" r="19" fill="url(#g-seal-c)" stroke="url(#g-gold-c)" stroke-width="1.8"/>
+        <circle cx="22" cy="22" r="16" stroke="#fbbf24" stroke-width="0.8" stroke-dasharray="2 2"/>
+        <!-- Golden Flame Crest Top -->
+        <path d="M22 5C22 5 24 9 26 9C28 9 30 7 30 7C30 11 26 13 26 13L22 11L18 13C18 13 14 11 14 7C14 7 16 9 18 9C20 9 22 5 22 5Z" fill="#fbbf24" stroke="#78350f" stroke-width="0.8"/>
+        <!-- Crimson Ruby Heart Medallion -->
+        <path d="M22 34C21.4 34 11 26 11 19.5C11 15.5 14 13 17.5 13C19.8 13 21.2 14.5 22 16C22.8 14.5 24.2 13 26.5 13C30 13 33 15.5 33 19.5C33 26 22.6 34 22 34Z" fill="#7f1d1d" stroke="#fbbf24" stroke-width="1.5"/>
+        <path d="M22 32C21.5 32 12.8 24.8 12.8 19.5C12.8 16.5 15.2 14.5 17.5 14.5C19.5 14.5 21 16 22 17.5C23 16 24.5 14.5 26.5 14.5C28.8 14.5 31.2 16.5 31.2 19.5C31.2 24.8 22.5 32 22 32Z" fill="url(#g-ruby-c)"/>
+        <circle cx="22" cy="22" r="2.2" fill="#fef08a" stroke="#b45309" stroke-width="0.6"/>
+      </svg>
+      Hearts
+    </div>
+    <div class="header-actions">
+      <div class="round-badge" id="round-status">R1 · Left</div>
+      <button class="pill-btn menu-btn" onclick="document.getElementById('menu-dialog').showModal()" aria-haspopup="dialog" aria-label="Open game menu">
+        Menu
+        <svg width="15" height="15" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M2 5h16M2 10h16M2 15h16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- TABLE AREA -->
+  <section class="table-area" aria-label="Table felt and opponents">
+    <div class="table-line" aria-hidden="true"></div>
+    <div class="seat seat-west" id="seat-west"><span>Michael</span> <strong>0</strong></div>
+    <div class="seat seat-north" id="seat-north"><span>Jerry</span> <strong>0</strong></div>
+    <div class="seat seat-east" id="seat-east"><span>Barbara</span> <strong>0</strong></div>
+    <div class="seat seat-south" id="seat-south" style="display:none;"><span>You</span> <strong>0</strong></div>
+
+    <div class="table-center" id="table-center">
+      <!-- Pass Slots or Live Trick Cards rendered here -->
+    </div>
+
+    <div class="table-status" id="table-status">Loading game...</div>
+  </section>
+
+  <!-- ACTION & INSTRUCTION PANEL -->
+  <section class="action-panel" aria-label="Game controls">
+    <div class="instruction-row">
+      <span class="instruction-text" id="instruction-text">Choose 3 cards to pass</span>
+      <span class="telemetry-badge" id="trick-counter">Pass Phase</span>
+    </div>
+    <div class="controls-row">
+      <button class="help-btn" onclick="document.getElementById('help-dialog').showModal()" aria-label="How to play Hearts">?</button>
+      <button class="primary-btn" id="primary-action-btn" disabled>Pass Left</button>
+    </div>
+  </section>
+
+  <!-- PLAYER HAND: ACCESSIBLE DYNAMIC 2-ROW FAN -->
+  <section class="hand-area" id="player-hand" aria-label="Your cards">
+    <!-- Hand buttons rendered by app.js -->
+  </section>
+</main>
+
+<!-- MENU DIALOG -->
+<dialog id="menu-dialog" aria-labelledby="menu-title">
+  <div class="dialog-header">
+    <h2 id="menu-title">Hearts Menu</h2>
+    <button class="close-btn" onclick="document.getElementById('menu-dialog').close()" aria-label="Close menu">×</button>
+  </div>
+  <p style="font-size:15px; color:#cbd5e1; margin:0 0 8px;">Match Standings (Lowest Score Wins):</p>
+  <div id="menu-standings">
+    <div class="score-row"><span>You</span> <strong id="menu-score-0">0 pts</strong></div>
+    <div class="score-row"><span>Michael</span> <strong id="menu-score-1">0 pts</strong></div>
+    <div class="score-row"><span>Jerry</span> <strong id="menu-score-2">0 pts</strong></div>
+    <div class="score-row"><span>Barbara</span> <strong id="menu-score-3">0 pts</strong></div>
+  </div>
+  <button class="modal-btn secondary" onclick="document.getElementById('menu-dialog').close(); window.HeartsApp.showLastTrick();">
+    👁 Review Last Trick
+  </button>
+  <button class="modal-btn secondary" id="sound-toggle-btn" onclick="const on = window.HeartsApp.toggleSound(); this.textContent = on ? '🔊 Sound: ON' : '🔇 Sound: OFF';">
+    🔊 Sound: ON
+  </button>
+  <button class="modal-btn secondary" onclick="document.getElementById('menu-dialog').close(); document.getElementById('help-dialog').showModal();">
+    📖 How to Play
+  </button>
+  <button class="modal-btn danger" onclick="document.getElementById('menu-dialog').close(); document.getElementById('new-game-dialog').showModal();">
+    ＋ New Match
+  </button>
+  <button class="modal-btn primary" onclick="document.getElementById('menu-dialog').close()">
+    Back to Game
+  </button>
+</dialog>
+
+<!-- NEW GAME CONFIRMATION DIALOG -->
+<dialog id="new-game-dialog" aria-labelledby="new-game-title">
+  <div class="dialog-header">
+    <h2 id="new-game-title">Start New Match?</h2>
+    <button class="close-btn" onclick="document.getElementById('new-game-dialog').close()" aria-label="Close">×</button>
+  </div>
+  <p>Starting a new match will reset all scores and begin Round 1 fresh.</p>
+  <button class="modal-btn danger" onclick="document.getElementById('new-game-dialog').close(); window.HeartsApp.startNewGame();">
+    Yes, Start Fresh Match
+  </button>
+  <button class="modal-btn primary" onclick="document.getElementById('new-game-dialog').close()">
+    Cancel
+  </button>
+</dialog>
+
+<!-- HELP DIALOG -->
+<dialog id="help-dialog" aria-labelledby="help-title">
+  <div class="dialog-header">
+    <h2 id="help-title">How to Play Hearts</h2>
+    <button class="close-btn" onclick="document.getElementById('help-dialog').close()" aria-label="Close help">×</button>
+  </div>
+  <p><strong>Goal:</strong> Keep your score as low as possible. First player to reach 100 points ends the match; lowest score wins.</p>
+  <p><strong>Penalty Points:</strong> Each Heart is worth 1 point. The Queen of Spades (Q♠) is worth 13 points.</p>
+  <p><strong>Passing:</strong> At the start of each round (except Round 4), select 3 cards to pass (Left, Right, Across, Hold).</p>
+  <p><strong>Rules:</strong></p>
+  <ul style="padding-left:18px; margin:6px 0;">
+    <li>The 2 of Clubs (2♣) always leads the first trick.</li>
+    <li>You must follow suit if you can. If you have none, you may discard any card.</li>
+    <li>No penalty points can be played on Trick 1.</li>
+    <li>Hearts cannot lead until "broken" by an off-suit discard.</li>
+  </ul>
+  <p><strong>Shooting the Moon:</strong> If you take ALL 26 penalty points in a round, you get 0 points and all 3 opponents get +26 points!</p>
+  <button class="modal-btn primary" onclick="document.getElementById('help-dialog').close()">Got It</button>
+</dialog>
+
+<!-- LAST TRICK REVIEW DIALOG -->
+<dialog id="last-trick-dialog" aria-labelledby="last-trick-title">
+  <div class="dialog-header">
+    <h2 id="last-trick-title">Previous Trick</h2>
+    <button class="close-btn" onclick="document.getElementById('last-trick-dialog').close()" aria-label="Close">×</button>
+  </div>
+  <div id="last-trick-cards">
+    <!-- Populated by app.js -->
+  </div>
+  <button class="modal-btn primary" onclick="document.getElementById('last-trick-dialog').close()">Done</button>
+</dialog>
+
+<!-- ROUND SUMMARY DIALOG -->
+<dialog id="round-summary-dialog" aria-labelledby="round-summary-title">
+  <div class="dialog-header">
+    <h2 id="round-summary-title">Round Summary</h2>
+  </div>
+  <div id="moon-shot-banner" style="display:none; background:#7f1d1d; color:#fef08a; border:1px solid #fbbf24; border-radius:8px; padding:10px; text-align:center; font-weight:bold; margin-bottom:12px;"></div>
+  <div id="round-summary-tbody"></div>
+  <button class="modal-btn primary" onclick="window.HeartsApp.startNextRound()">Next Round →</button>
+</dialog>
+
+<!-- GAME OVER DIALOG -->
+<dialog id="game-over-dialog" aria-labelledby="game-over-title">
+  <div class="dialog-header">
+    <h2 id="game-over-title">Match Finished!</h2>
+  </div>
+  <p style="text-align:center; font-size:22px; font-weight:bold; color:#fbbf24; margin:8px 0;" id="winner-announcement">You Win!</p>
+  <div id="final-scores-list" style="margin:16px 0;"></div>
+  <button class="modal-btn primary" onclick="document.getElementById('game-over-dialog').close(); window.HeartsApp.startNewGame();">Play Again</button>
+</dialog>
+
+<!-- SCRIPTS -->
+<script src="js/card-glyphs.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(function(err) {
+      console.log('SW registration failed:', err);
+    });
+  }
+</script>
+
+</body>
+</html>

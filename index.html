@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Antigravity Games — For Mom</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mom Games">
+  <meta name="theme-color" content="#06130d">
+  <style>
+    :root {
+      color-scheme: dark;
+      --felt: #153828;
+      --brass: #fbbf24;
+      --cream: #fff7df;
+      --navy: #092017;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      margin: 0; padding: 0; width: 100%; height: 100%; height: 100dvh;
+      background: radial-gradient(ellipse at 50% 25%, #234c37 0%, #153828 45%, #081d13 90%);
+      color: var(--cream);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+      padding: max(44px, env(safe-area-inset-top, 0px)) 16px max(32px, env(safe-area-inset-bottom, 0px));
+      user-select: none; -webkit-user-select: none;
+      overflow: hidden;
+    }
+    header {
+      text-align: center; margin-top: 12px;
+    }
+    .crest {
+      width: 58px; height: 58px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0 0 6px; font: bold 32px/1.1 Georgia, serif;
+      color: var(--cream); text-shadow: 0 2px 4px #000;
+      letter-spacing: -0.5px;
+    }
+    p.subtitle {
+      margin: 0; font-size: 16px; font-weight: 650; color: #f3d695;
+    }
+
+    .games-grid {
+      width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 16px;
+      margin: auto 0;
+    }
+    .game-card {
+      display: flex; align-items: center; gap: 16px;
+      background: linear-gradient(135deg, #18422f, #0d261b);
+      border: 2px solid var(--brass); border-radius: 20px;
+      padding: 18px 16px; text-decoration: none; color: var(--cream);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      min-height: 100px;
+    }
+    .game-card:active {
+      transform: translateY(2px) scale(0.99);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .game-icon-box {
+      width: 64px; height: 64px; border-radius: 14px;
+      background: #092117; border: 1.5px solid var(--brass);
+      display: grid; place-items: center; flex: 0 0 64px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+    }
+    .game-info { flex: 1 1 auto; }
+    .game-title {
+      font: bold 22px/1.2 Georgia, serif; color: #fff4d5; margin: 0 0 4px;
+    }
+    .game-desc {
+      font-size: 14px; color: #cbd5e1; line-height: 1.35; margin: 0;
+    }
+    .play-arrow {
+      font-size: 24px; font-weight: bold; color: var(--brass); flex: 0 0 auto;
+    }
+
+    footer {
+      font-size: 13px; font-weight: 600; color: #94a3b8; text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <!-- Option C: Imperial Dragon Medallion Crest -->
+  <svg class="crest" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="g-seal-hub" cx="22" cy="22" r="18" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#18432d"/>
+        <stop offset="70%" stop-color="#0b2418"/>
+        <stop offset="100%" stop-color="#05140d"/>
+      </radialGradient>
+      <linearGradient id="g-gold-hub" x1="4" y1="4" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#fef08a"/>
+        <stop offset="50%" stop-color="#fbbf24"/>
+        <stop offset="100%" stop-color="#b45309"/>
+      </linearGradient>
+      <linearGradient id="g-ruby-hub" x1="22" y1="13" x2="22" y2="34" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#ef4444"/>
+        <stop offset="60%" stop-color="#dc2626"/>
+        <stop offset="100%" stop-color="#991b1b"/>
+      </linearGradient>
+    </defs>
+    <circle cx="22" cy="22" r="19" fill="url(#g-seal-hub)" stroke="url(#g-gold-hub)" stroke-width="1.8"/>
+    <circle cx="22" cy="22" r="16" stroke="#fbbf24" stroke-width="0.8" stroke-dasharray="2 2"/>
+    <path d="M22 5C22 5 24 9 26 9C28 9 30 7 30 7C30 11 26 13 26 13L22 11L18 13C18 13 14 11 14 7C14 7 16 9 18 9C20 9 22 5 22 5Z" fill="#fbbf24" stroke="#78350f" stroke-width="0.8"/>
+    <path d="M22 34C21.4 34 11 26 11 19.5C11 15.5 14 13 17.5 13C19.8 13 21.2 14.5 22 16C22.8 14.5 24.2 13 26.5 13C30 13 33 15.5 33 19.5C33 26 22.6 34 22 34Z" fill="#7f1d1d" stroke="#fbbf24" stroke-width="1.5"/>
+    <path d="M22 32C21.5 32 12.8 24.8 12.8 19.5C12.8 16.5 15.2 14.5 17.5 14.5C19.5 14.5 21 16 22 17.5C23 16 24.5 14.5 26.5 14.5C28.8 14.5 31.2 16.5 31.2 19.5C31.2 24.8 22.5 32 22 32Z" fill="url(#g-ruby-hub)"/>
+    <circle cx="22" cy="22" r="2.2" fill="#fef08a" stroke="#b45309" stroke-width="0.6"/>
+  </svg>
+  <h1>Mom’s Games</h1>
+  <p class="subtitle">Ad-Free · Accessible · For iPhone</p>
+</header>
+
+<main class="games-grid">
+  <!-- HEARTS -->
+  <a class="game-card" href="hearts/">
+    <div class="game-icon-box">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="#ef4444">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    </div>
+    <div class="game-info">
+      <div class="game-title">Hearts</div>
+      <p class="game-desc">Avoid hearts & the Queen of Spades against Michael, Jerry & Barbara.</p>
+    </div>
+    <div class="play-arrow">→</div>
+  </a>
+
+  <!-- SOLITAIRE -->
+  <a class="game-card" href="solitaire/">
+    <div class="game-icon-box">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="#fbbf24">
+        <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+      </svg>
+    </div>
+    <div class="game-info">
+      <div class="game-title">Solitaire</div>
+      <p class="game-desc">Classic Klondike Solitaire with guaranteed winnable deals & large cards.</p>
+    </div>
+    <div class="play-arrow">→</div>
+  </a>
+</main>
+
+<footer>
+  Antigravity Library · Built with Love
+</footer>
+
+</body>
+</html>
