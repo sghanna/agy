@@ -25,7 +25,8 @@
 
 ## 📖 Product & Design Case Studies
 
-* **[Solitaire for Low Vision](file:///Users/shawnmac/agy/solitaire/CASE-STUDY.md)**: End-to-end design leadership, ergonomic button isolation (New Game buffer), Q-Tail overlap rule, and Imperial Dragon cultural theming.
+* **[Accessible Card Games Portfolio Case Study](file:///Users/shawnmac/agy/portfolio/accessible-card-games.md)**: High-level product and design leadership overview covering both Solitaire and Hearts for low-vision seniors, with validation evidence, decision logs, and side-by-side design comparisons.
+* **[Solitaire for Low Vision](file:///Users/shawnmac/agy/solitaire/CASE-STUDY.md)** ([Interactive HTML](file:///Users/shawnmac/agy/solitaire/case-study.html)): End-to-end design leadership, ergonomic button isolation (New Game buffer), Q-Tail overlap rule, and Imperial Dragon cultural theming.
 * **[Hearts for Low Vision](file:///Users/shawnmac/agy/hearts/CASE-STUDY.md)**: Multi-player trick-taking mechanics, dynamic 2-row fan layout, unplayable card affordance, Imperial Carmine WCAG AAA contrast engineering, and zero-text app icon standards.
 
 ---
