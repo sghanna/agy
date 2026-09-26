@@ -1,0 +1,22 @@
+{
+  "name": "agy-solitaire-ipad",
+  "short_name": "Solitaire HD",
+  "description": "Accessible Klondike Solitaire tailored for low-vision and iPad Air 2",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0c2419",
+  "theme_color": "#0c2419",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
